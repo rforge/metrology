@@ -24,13 +24,16 @@ mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25)
   \item{groups}{factor, or vetor which can be coerced to factor, of groups. If present, \code{x} is 
     interpreted as a vector of individual observations and \code{u} and \code{n} ignored.}
   \item{\dots}{Additional parameters passed to other functions.}
-  \item{tol}{numeric tolerance; iteration stops when the step size drops below \code{tol}}
+  \item{tol}{numeric tolerance; iteration stops when the variance step size drops below \code{tol*var(x)}}
   \item{maxiter}{numeric maximum number of iterations}
 }
 \details{
   The Mandel-Paule algorithm finds the between-method variance by iteratively solving the
   equation relating the weighted mean to the weighting factor applied. The weighting factor is
-  the inverse of the sum of the standard error in \code{x} and the between-method variance.
+  the inverse of the sum of the standard error in \code{x} and the between-group variance.
+  
+  If the iterative procedure produces a negative estimate for the between-group variance,
+  the between-group variance is set to zero.
 
   For the default method, if \code{u} is present and \code{n=NULL}, \code{u} is interpreted as 
   a vector of standard uncertainties or standard errors. If \code{n} is not \code{NULL}, \code{u} 
@@ -39,14 +42,19 @@ mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25)
   If \code{groups} is not \code{NULL}, \code{x} is interpreted as a vector of individual 
   observations grouped by \code{groups}, and the algorithm is applied to the corresponding 
   group means and standard errors. 
+  
+  If \code{maxiter} is set less than 1, no iterations are performed and the consensus mean 
+  is returned as \code{NA}.
 }
 \value{
-  An object of some kind. Probably not class "mpaule" which contains the following fields:
-  \item{data}{the original data}
-  \item{mean}{unweighted mean}
-  \item{wt.mean}{weighted mean}
-  \item{sd.btwn}{between-method standard deviation}
-  \item{std.err}{standard error in the weighted mean}
+  A loc.est object; see loc.est for details. In the returned object, \code{method.details} 
+  is returned as :
+  \item{var.between}{the estimated between-group variance)}
+  \item{iter}{the number of iterations taken}
+  \item{converged}{\code{converged} indicates the convergence status. \code{0L} indicates
+  failure to converge (\code{maxiter} reached before step size drops below tolerance); 
+  \code{1L} indicates normal convergence; \code{2L} indicates that the final step size resulted 
+  in a negative between-group variance, at which point the variance and step size are set to 0.0}
 }
 \references{
 Paule, R. C.  and Mandel, J. (1982), J Res Nat Bur Stand, \bold{87}, (5) 377-385 
