@@ -1,5 +1,5 @@
-% file metRology/man/Pb.Rd
-% (c) 2009 S Ellison
+% file metRology/man/apricot.Rd
+% (c) 2011 S Ellison
 \name{apricot}
 \docType{data}
 \alias{apricot}
@@ -11,7 +11,7 @@ A data frame containing reported duplicate results for dietary fibre from
 a collaborative study.
 }
 \usage{
-	apricot
+	data(apricot)
 }
 \format{
 A data frame containing duplicate results from 9 laboratories:
