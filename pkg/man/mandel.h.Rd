@@ -52,7 +52,7 @@ sets of observations. Given a set of observations \eqn{x_{ijl}}{x[i,j,l]} where 
 denotes observation \eqn{l}, \eqn{l=1, 2, ... n} for measurand or test item \eqn{j} and group
 (usually laboratory) \eqn{i}, \eqn{i=1, 2, ... p}, Mandel's \eqn{h} is given by:
 
-\deqn{h=\frac{\bar{x_ij}-\bar{x_j}}{\sum_{i=1}^p{\frac{(\bar{x_ij}-\bar{x_j})}{p-1}}}}
+\deqn{h=\frac{\bar{x_{ij}}-\bar{x_j}}{\sum_{i=1}^p{\frac{(\bar{x_{ij}}-\bar{x_j})}{p-1}}}}
 
 If \code{x} is a vector, one-dimensional array or single-column matrix, values are aggregated 
 by \code{g} and, if present, by \code{m}. If \code{x} is a data frame or matrix, each column 
