@@ -136,7 +136,8 @@ of known sigma, for example when summarising z-scores with expected sd of 1.0, u
 This function is called for its side effect, which is the production of a plot.
 }
 \references{
-Duewer, Probably in Anal. Chem. in about 1990 [### Find ref - SLRE ###] 
+Duewer, D, Probably in Anal. Chem. in about 1990
+%%  [### Find ref - SLRE ###] 
 }
 \author{S Ellison \email{s.ellison@lgc.co.uk}
 }
