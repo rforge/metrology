@@ -3,15 +3,15 @@
 #
 # 2011-03-26 amended tolerance handling
 # to prevent 'small' variances being ignored
-mpaule <- function(x, ..., tol=.Machine$double.eps^0.25, maxiter=25) {
-	mandel.paule(x, ..., tol=tol, maxiter=maxiter)
-}
-
 mandel.paule <- function(x, ..., tol=.Machine$double.eps^0.25, maxiter=25) {
-	UseMethod("mandel.paule")
+	mpaule(x, ..., tol=tol, maxiter=maxiter)
 }
 
-mandel.paule.default <- function(x, u=NULL, n=NULL, groups=NULL, 
+mpaule <- function(x, ..., tol=.Machine$double.eps^0.25, maxiter=25) {
+	UseMethod("mpaule")
+}
+
+mpaule.default <- function(x, u=NULL, n=NULL, groups=NULL, 
 	tol=.Machine$double.eps^0.25, maxiter=25)		
 {
 #If n present, u is interpreted as sd of n observations

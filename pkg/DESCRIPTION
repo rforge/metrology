@@ -1,10 +1,10 @@
 Package: metRology
-Version: 0.9-02
-Date: 2011-03-14
+Version: 0.9-03
+Date: 2011-04-07
 Title: Support for metrological applications
 Author: Stephen L R Ellison <s.ellison@lgc.co.uk>.
 Maintainer: Stephen L R Ellison <s.ellison@lgc.co.uk>
-Depends: R (>= 2.9.0), base, stats, graphics, MASS   
+Depends: R (>= 2.10.0), base, stats, graphics, MASS   
 Suggests:
 Description: metRology provides classes and calculation and plotting functions 
  for metrology applications, including measurement uncertainty estimation

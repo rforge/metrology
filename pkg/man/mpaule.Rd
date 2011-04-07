@@ -1,20 +1,20 @@
 \name{Mandel-Paule}
-\alias{mandel.paule}
-\alias{mandel.paule.default}
 \alias{mpaule}
+\alias{mpaule.default}
+\alias{mandel.paule}
 \title{Mandel-Paule calculation}
 \description{
   Calculate a weighted mean, between-group standard deviation and standard error on the
   weighted mean using the Mandel-Paule algorithm. 
 }
 \usage{
+
 mpaule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25) 
 
-mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25) 
-
-\method{mandel.paule}{default}(x, u=NULL, n=NULL, groups=NULL, 
+\method{mpaule}{default}(x, u=NULL, n=NULL, groups=NULL, 
                    tol=.Machine$double.eps^0.25, maxiter=25)
 
+mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25) 
 }
 \arguments{
   \item{x}{numeric vector of mean values for groups, or (if \code{groups} 
@@ -47,6 +47,8 @@ mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25)
   
   If \code{maxiter} is set less than 1, no iterations are performed and the consensus mean 
   is returned as \code{NA}.
+  
+  \code{mandel.paule} is an alias for \code{mpaule} retained for backward compatibility.
 }
 \value{
   A loc.est object; see loc.est for details. In the returned object, \code{method.details} 
