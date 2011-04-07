@@ -55,6 +55,8 @@ mandel.paule.default <- function(x, u=NULL, n=NULL, groups=NULL,
 		if(v < 0) {
 			v <- 0.0
 			dv <- 0.0
+			wt <- 1 / ( u.i^2 + v )
+			cons.mean <- sum(wt * x.i) / sum(wt)
 			converged <- 2L
 		}
 		
