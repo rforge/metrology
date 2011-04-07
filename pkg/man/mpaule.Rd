@@ -17,8 +17,10 @@ mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25)
 
 }
 \arguments{
-  \item{x}{numeric vector of mean values for groups}
-  \item{u}{numeric vector of standard deviations or standard uncertainties associated with the values \code{x}}
+  \item{x}{numeric vector of mean values for groups, or (if \code{groups} 
+  	is given) of individual observations}
+  \item{u}{numeric vector of standard deviations or standard uncertainties 
+  	associated with the values \code{x}}
   \item{n}{integer vector of numbers in each group. If \code{NULL}, \code{u} are interpreted as 
       standard uncertainties or standard errors. \code{n} is recycled to \code{length(x)}.}
   \item{groups}{factor, or vetor which can be coerced to factor, of groups. If present, \code{x} is 
