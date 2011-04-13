@@ -51,8 +51,9 @@ mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25)
   \code{mandel.paule} is an alias for \code{mpaule} retained for backward compatibility.
 }
 \value{
-  A loc.est object; see loc.est for details. In the returned object, \code{method.details} 
-  is returned as :
+  A loc.est object; see loc.est for details. In the returned object, \code{df} is
+  set to \eqn{n-1} where \eqn{n} is the number of non-\code{NA} observations or
+  group means as appropriate, and \code{method.details} is returned as :
   \item{var.between}{the estimated between-group variance)}
   \item{iter}{the number of iterations taken}
   \item{converged}{\code{converged} indicates the convergence status. \code{0L} indicates

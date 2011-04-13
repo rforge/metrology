@@ -3,6 +3,9 @@
 #
 # 2011-03-26 amended tolerance handling
 # to prevent 'small' variances being ignored
+#
+# 2011-04-15 amended to include df based on count(x)
+# 
 mandel.paule <- function(x, ..., tol=.Machine$double.eps^0.25, maxiter=25) {
 	mpaule(x, ..., tol=tol, maxiter=maxiter)
 }
@@ -15,9 +18,6 @@ mpaule.default <- function(x, u=NULL, n=NULL, groups=NULL,
 	tol=.Machine$double.eps^0.25, maxiter=25)		
 {
 #If n present, u is interpreted as sd of n observations
-#	x <- input.data[,1]
-#	u <- input.data[,2]
-#	n <- input.data[,3] + 1
 	
 	if(tol >= 1.0 ) stop("Tolerance must be <1.0")
 		
@@ -71,7 +71,7 @@ mpaule.default <- function(x, u=NULL, n=NULL, groups=NULL,
 	}
 	
 
-	rv <- .construct.loc.est( x=cons.mean, u=1/sqrt(sum(wt)), df=NA, 
+	rv <- .construct.loc.est( x=cons.mean, u=1/sqrt(sum(wt)), df=count(x.i)-1, 
 		xi=x.i, ui=u.i, u.eff=sqrt(v+u.i^2), w=rep(1, length(x.i)), method="Mandel-Paule", 
 		method.details=list(var.between=v, iter=iter, converged=converged, tol=tol*v.x))
 	
