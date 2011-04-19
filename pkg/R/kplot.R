@@ -176,3 +176,54 @@ kplot.default<-function(x,U=NULL, labels=names(x),  assigned=NULL, U.assigned=NU
 	}
 	return(invisible(list(order=oo, at=at)))
 }
+
+
+
+kpoints<-function(x,U=NULL, labels=names(x),  
+	U.lo=U, U.hi=U, k=2, strata=NULL,
+	ordered=TRUE, order.strata=levels(strata),
+	at=1:length(x), 
+	ci.width=0.03, col.ci=par("fg"), lty.ci=par("lty"), lwd.ci=par("lwd"),
+	pch=21, col=par("fg"), bg="white", add.outliers=FALSE, outlier.offset=0.2,  
+	...)
+{
+	oo<-if(ordered) order(x) else 1:length(x)
+	
+	Lx<-length(x)
+	
+	#expand graphics pars to full length to simplify ordering
+	col <- rep(col, length.out=Lx)
+	bg <- rep(bg, length.out=Lx)
+	pch <- rep(pch, length.out=Lx)
+	col.ci <- rep(col.ci, length.out=Lx)
+	lty.ci <- rep(lty.ci, length.out=Lx)
+	lwd.ci <- rep(lwd.ci, length.out=Lx)
+	
+	upper=x+U.hi
+	lower=x-U.lo
+	if(length(k)<Lx) k <- rep(k, length.out=Lx)
+	xlim <- par("usr")[1:2]
+	ylim <- par("usr")[3:4]	
+		
+	arrows(at,lower[oo], at, upper[oo], length=ci.width, code=3,angle=90, col=col.ci[oo], lwd=lwd.ci[oo], lty=lty.ci[oo])
+	points(at,x[oo], pch=pch[oo], bg=bg[oo], col=col[oo])
+	
+	if(add.outliers) {
+		a.len<-diff(ylim)/6
+		high.index<-which( x[oo]>max(ylim) )
+		low.index<-which( x[oo]<min(ylim) )
+		
+		if(length(high.index)>0) {
+			arrows(at[high.index], max(ylim)-a.len, at[high.index], max(ylim), length=ci.width*1.5, angle=20)
+			text(x=at[high.index]-outlier.offset, y=max(ylim)-a.len, labels=paste(x[oo][high.index]), adj=c(0.5,0.5), srt=90, cex=0.7)
+		}
+		
+		if(length(low.index)>0) {
+			arrows(at[low.index], min(ylim)+a.len, at[low.index], min(ylim), length=ci.width*1.5, angle=20)
+			text(x=at[low.index]-outlier.offset, y=min(ylim)+a.len, labels=paste(x[oo][low.index]), adj=c(0.5,0.5), srt=90, cex=0.7)
+		}
+	}
+	
+	return(invisible(list(order=oo, at=at)))
+}
+

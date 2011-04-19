@@ -5,6 +5,7 @@
 \alias{ kplot }
 \alias{ kplot.default }
 \alias{ kplot.ilab }
+\alias{ kpoints }
 
 \title{ Dot-and-bar plot for Key Comparisons }
 \description{
@@ -36,6 +37,13 @@ kplot(x, \dots)
 	mgp.pdf=c(3,0.5,0), \dots)
 	
 \method{kplot}{ilab}(ilab, \dots)
+
+kpoints(x,U=NULL, labels=names(x), U.lo=U, U.hi=U, k=2, 
+	strata=NULL, ordered=TRUE, order.strata=levels(strata),
+	at=1:length(x), ci.width=0.03, col.ci=par("fg"), 
+	lty.ci=par("lty"), lwd.ci=par("lwd"), pch=21, 
+	col=par("fg"), bg="white", add.outliers=FALSE, 
+	outlier.offset=0.2, \dots)
 
 }
 \arguments{
@@ -129,6 +137,11 @@ kplot(x, \dots)
 	The \sQuote{ilab} method passes all parameters in \sQuote{\dots} to the default method
 	with default values for \code{x}, upper and lower bounds \code{U.lo} and \code{U.hi}, 
 	labels and title taken from the \code{ilab} object.
+	
+	\code{kpoints} is a convenience function for adding points with confidence 
+	intervals to an existing plot. \code{kpoints} is not a generic function  
+	and requires a vector \code{x}. Note that \code{kpoints} does not check for 
+	the presence of a marginal density plot.
 }
 \value{
 	Invisibly returns a list with components:
