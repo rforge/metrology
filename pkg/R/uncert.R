@@ -188,7 +188,7 @@ uncert.expression<-function(expr, x, u, method=c("GUM", "NUM", "kragten", "k2", 
 	} else if(method=="GUM") {
 		d.expr<-deriv(expr, expr.names)
 		y<-eval(d.expr, c(x,...)) 
-		ci<-attr(y, "gradient")[1,]
+		ci<-attr(y, "gradient")[1,names(x)] #Ensures correct order for gradient
 		uv<-unlist(u)
 		#Construct covariance matrix cov if not supplied
 		if(missing(cov)) {
@@ -258,7 +258,7 @@ uncert.formula<-function(formula, x, u, method=c("GUM", "NUM", "kragten", "k2", 
 	} else if(method=="GUM") {
 		d.formula<-deriv(formula, formula.names)
 		y<-eval(d.formula, c(x,...)) 
-		ci<-attr(y, "gradient")[1,]
+		ci<-attr(y, "gradient")[1,names(x)] #Ensures correct order for gradient
 		uv<-unlist(u)
 		#Construct covariance matrix cov if not supplied
 		if(missing(cov)) {
