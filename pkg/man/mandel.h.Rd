@@ -14,13 +14,13 @@ Mandel's h is an indication of relative deviation from the mean value.
 }
 \usage{
 	mandel.h(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			n = NA, ...)
+			method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.h}{default}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			n = NA, ...)
+			method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.h}{ilab}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			n = NA, ...)
+			method=c("classical", "robust"), n = NA, ...)
 }
 \arguments{
   \item{x}{An R object (see Details below), which contains replicate observations or, 
@@ -37,10 +37,11 @@ Mandel's h is an indication of relative deviation from the mean value.
           such as \code{mean} and \code{sd}.}
   \item{rowname}{A single character label for the primary grouping factor 
   	(e.g. "Lab", "Organisation").}
+  \item{method}{Character scalar giving the calculation method. \code{"classical"} gives the
+  	traditional calculation; \code{"robust"} gives a robust variant (see Details).}
   \item{n}{scalar number of observations per group. Required only if \code{x} consists of 
   	calculated standard deviations.}
-  \item{\dots}{Additional parameters passed to other methods. Currently not 
-  implemented.}
+  \item{\dots}{Additional parameters passed to \code{hubers} when \code{method="robust"}.}
 }
 \details{
 \code{mandel.h} is a convenience wrapper for mandel.kh(..., type="h"). It is generic, 
@@ -52,23 +53,31 @@ sets of observations. Given a set of observations \eqn{x_{ijl}}{x[i,j,l]} where 
 denotes observation \eqn{l}, \eqn{l=1, 2, ... n} for measurand or test item \eqn{j} and group
 (usually laboratory) \eqn{i}, \eqn{i=1, 2, ... p}, Mandel's \eqn{h} is given by:
 
-\deqn{h=\frac{\bar{x_{ij}}-\bar{x_j}}{\sum_{i=1}^p{\frac{(\bar{x_{ij}}-\bar{x_j})}{p-1}}}}
+\deqn{h=\frac{\bar{x_{ij}}-\bar{x_j}}{s_j}}
+
+where
+\eqn{ s_j=\sqrt{\sum_{i=1}^p{\frac{(\bar{x_{ij}}-\bar{x_j})}{p-1}}}}
 
 If \code{x} is a vector, one-dimensional array or single-column matrix, values are aggregated 
 by \code{g} and, if present, by \code{m}. If \code{x} is a data frame or matrix, each column 
 is aggregated by \code{g} and \code{m} silently ignored if present. In all cases, if \code{g}
 is \code{NULL} or missing, each row (or value, if a vector) in \code{x} 
-is taken as a pre-calculated mean (for Mandel's h) or standard deviation (for Mandel's k).
+is taken as a pre-calculated mean (for Mandel's \eqn{h}) or standard deviation (for Mandel's \eqn{k}).
 
 If \code{x} is an object of class \code{'ilab'}, \code{g} defaults to \code{'$org'} and 
 \code{m} to \code{$measurand}. 
 
 The returned object includes a label (\code{'grouped.by'}) for the primary grouping factor. 
-For the \code{'ilab'} method, this is "Organisation". For other methods, If \code{rowname} is 
+For the \code{'ilab'} method, this is \code{"Organisation"}. For other methods, If \code{rowname} is 
 non-null, \code{rowname} is used. If \code{rowname} is NULL, the default is \code{deparse(substitute(g))};
 if \code{g} is also NULL or missing, "Row" is used.
 
+If \code{method="robust"}, Mandel's \eqn{h} is replaced by a robust z score calculated by 
+replacing \eqn{\bar{x_j}} and \eqn{s_j} with the robust estimates of location and scale 
+obtained using Huber's estimate with tuning constant \code{k} set to 1.5 (unless otherwise 
+specified in \code{...}). 
 }
+
 \value{
 mandel.h returns an object of class \code{"mandel.kh"}, which is  a data frame consisting
 of the required Mandel's statistics and in which each row corresponds to a level of \code{g}
@@ -114,6 +123,10 @@ standard measurement method. ISO, Geneva (1994).
 		item=factor(rep("CRM", nrow(RMstk))) ) )
 
 	plot(mandel.h(RM.ilab))
+	
+	#Robust variant
+	hrob <- with(RMstudy, mandel.kh(RMstudy[2:9], g=Lab, type="h", method="robust"))
+	plot(hrob, las=2)
 	
 }
 \keyword{univar}

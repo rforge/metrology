@@ -8,8 +8,8 @@ Barplot of Mandel's h or k statistics
 grouped and with appropriate indicator lines for unusual values.
 }
 \usage{
-	barplot.mandel.kh(x, main = paste("Mandel's", attr(x, "mandel.type")), 
-		probs = c(0.95, 0.99), xlab = attr(x, "grouped.by"), 
+	barplot.mandel.kh(x, probs = c(0.95, 0.99), main,
+		xlab = attr(x, "grouped.by"), 
 		ylab = attr(x, "mandel.type"), separators = TRUE, 
 		zero.line = TRUE, ylim, p.adjust = "none", 
 		frame.plot = TRUE, ..., 
@@ -21,15 +21,18 @@ grouped and with appropriate indicator lines for unusual values.
 \arguments{
   \item{x}{An object of class \code{'mandel.kh'}
 }
-  \item{main}{
- 	a main title for the plot
- }
   \item{probs}{
 	Indicator lines are drawn for these probabilities. Note that
 	\code{probs} is interpreted as specifying two-tailed probabilities
 	for Mandel's h and one-sided (upper tail) probabilities for
 	Mandel's k.
 }
+  \item{main}{
+ 	a main title for the plot. If missing, the default is
+ 	\code{ paste(deparse(substitute(x)), " - Mandel's", 
+                     attr(x, "mandel.type"), 
+                     if(attr(x, "mandel.method") == "robust") "(Robust variant)")}
+  }
   \item{xlab}{
   	a label for the x axis; defaults to the \code{grouped.by} attribute for
   	\code{x}.
@@ -77,6 +80,12 @@ grouped and with appropriate indicator lines for unusual values.
 Mandel's statistics are traditionally plotted for inter-laboratory study data, 
 grouped by laboratory, to give a rapid graphical view of laboratory bias and 
 relative precision. This plot produces a grouped, side-by-side bar plot.
+
+For classical Mandel statistics, indicator lines are drawn based on \code{qmandelh}
+or  \code{qmandelk} as appropriate. For robust variants, indicator lines use
+\code{qnorm} for the \eqn{h} statistic and \code{qf(probs, n, Inf)} for 
+the \eqn{k} statistic. Note that this corresponds to taking the robust estimates of 
+location and scale as true values, so will be somewhat anticonservative.
 
 }
 \value{

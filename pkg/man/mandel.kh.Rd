@@ -19,22 +19,22 @@ all groups.
 }
 \usage{
 	mandel.kh(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			type = c("h", "k"), n = NA, ...)
+			type = c("h", "k"), method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.kh}{default}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			type = c("h", "k"), n = NA, ...)
+			type = c("h", "k"), method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.kh}{data.frame}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			type = c("h", "k"), n = NA, ...)
+			type = c("h", "k"), method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.kh}{matrix}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			type = c("h", "k"), n = NA, ...)
+			type = c("h", "k"), method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.kh}{array}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			type = c("h", "k"), n = NA, ...)
+			type = c("h", "k"), method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.kh}{ilab}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			type = c("h", "k"), n = NA, ...)
+			type = c("h", "k"), method=c("classical", "robust"), n = NA, ...)
 
 }
 \arguments{
@@ -53,10 +53,12 @@ all groups.
   \item{rowname}{A single character label for the primary grouping factor 
   	(e.g. "Lab", "Organisation").}
   \item{type}{Character denoting the statistic to be calculated; may be "h" or "k".}
+  \item{method}{Character scalar giving the calculation method. \code{"classical"} gives the
+  	traditional calculation; \code{"robust"} gives a robust variant (see Details).}
   \item{n}{scalar number of observations per group. Required only if \code{x} consists of 
   	calculated standard deviations.}
-  \item{\dots}{Additional parameters passed to other methods. Currently not 
-  implemented.}
+  \item{\dots}{Additional parameters passed to \code{hubers} when \code{method="robust"} 
+  	and \code{type="h"}.}
 }
 \details{
 \code{mandel.kh} can be called directly, but is usually intended to be called via 
@@ -70,9 +72,13 @@ sets of observations. Given a set of observations \eqn{x_{ijl}}{x[i,j,l]} where 
 denotes observation \eqn{l}, \eqn{l=1, 2, ... n} for measurand or test item \eqn{j} and group
 (usually laboratory) \eqn{i}, \eqn{i=1, 2, ... p}, Mandel's \eqn{h} and \eqn{k} are given by:
 
-\deqn{h=\frac{\bar{x_{ij}}-\bar{x_j}}{\sum_{i=1}^p{\frac{(\bar{x_{ij}}-\bar{x_j})}{p-1}}}}
+\deqn{h=\frac{\bar{x_{ij}}-\bar{x_j}}{s_j}}
 
-\deqn{k=\frac{s_{ij}^2}{\sum_{i=1}^p{s_{ij}^2/p}}}
+where
+\eqn{ s_j=\sqrt{\sum_{i=1}^p{\frac{(\bar{x_{ij}}-\bar{x_j})}{p-1}}}}
+
+and
+\deqn{k=\sqrt{\frac{s_{ij}^2}{\sum_{i=1}^p{s_{ij}^2/p}}}}
 
 where \eqn{s_{ij}} is the standard deviation of values \eqn{x_{ijk}} over \eqn{k=1, 2, ..., n}. 
 
@@ -80,7 +86,7 @@ If \code{x} is a vector, one-dimensional array or single-column matrix, values a
 by \code{g} and, if present, by \code{m}. If \code{x} is a data frame or matrix, each column 
 is aggregated by \code{g} and \code{m} silently ignored if present. In all cases, if \code{g}
 is \code{NULL} or missing, each row (or value, if a vector) in \code{x} 
-is taken as a pre-calculated mean (for Mandel's h) or standard deviation (for Mandel's k).
+is taken as a pre-calculated mean (for Mandel's \eqn{h}) or standard deviation (for Mandel's \eqn{k}).
 
 If \code{x} is an object of class \code{'ilab'}, \code{g} defaults to \code{'$org'} and 
 \code{m} to \code{$measurand}. 
@@ -89,6 +95,12 @@ The returned object includes a label (\code{'grouped.by'}) for the primary group
 For the \code{'ilab'} method, this is "Organisation". For other methods, If \code{rowname} is 
 non-null, \code{rowname} is used. If \code{rowname} is NULL, the default is \code{deparse(substitute(g))};
 if \code{g} is also NULL or missing, "Row" is used.
+
+If \code{method="robust"}, Mandel's \eqn{h} is replaced by a robust z score calculated by replacing \eqn{\bar{x_j}} 
+and \eqn{s_j} with the robust estimates of location and scale obtained using Huber's estimate with tuning constant 
+\code{k} set to 1.5 (or as included in \code{...}), and Mandel's \eqn{k} is calculated by replacing the 
+classical pooled standard deviation in the denominator with the robust pooled standard deviation 
+calculated by algorithm S (see \code{\link{algS}}). 
 
 }
 \value{
@@ -114,6 +126,7 @@ standard measurement method. ISO, Geneva (1994).
 \code{\link{mandel.h}}, \code{\link{mandel.k}}  for convenience functions;
 \code{\link{pmandelh}}, \code{\link{pmandelk}}  for probabilities, quantiles etc.;
 \code{\link{plot.mandel.kh}}, \code{\link{barplot.mandel.kh}} for plotting methods.
+\code{\link{algS}} and \code{\link[MASS]{hubers}} for robust estimates used when \code{method="robust"}.
 }
 \examples{
 	data(RMstudy)
@@ -140,5 +153,11 @@ standard measurement method. ISO, Geneva (1994).
 
 	plot(mandel.kh(RM.ilab, type="h"))
 	
+	#Robust variants
+	hrob <- with(RMstudy, mandel.kh(RMstudy[2:9], g=Lab, type="h", method="robust"))
+	plot(hrob, las=2)
+	
+	krob <- with(RMstudy, mandel.kh(RMstudy[2:9], g=Lab, type="k", method="robust"))
+	plot(krob, las=2)
 }
 \keyword{univar}

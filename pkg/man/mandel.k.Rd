@@ -14,13 +14,13 @@ Mandel's k an indicator of precision compared to the pooled standard deviation a
 all groups.}
 \usage{
 	mandel.k(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			n = NA, ...)
+			method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.k}{default}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			n = NA, ...)
+			method=c("classical", "robust"), n = NA, ...)
 
 	\method{mandel.k}{ilab}(x, g = NULL, m = NULL, na.rm = T, rowname = NULL, 
-			n = NA, ...)
+			method=c("classical", "robust"), n = NA, ...)
 }
 \arguments{
   \item{x}{An R object (see Details below), which contains replicate observations or, 
@@ -37,6 +37,8 @@ all groups.}
           such as \code{mean} and \code{sd}.}
   \item{rowname}{A single character label for the primary grouping factor 
   	(e.g. "Lab", "Organisation").}
+  \item{method}{Character scalar giving the calculation method. \code{"classical"} gives the
+  	traditional calculation; \code{"robust"} gives a robust variant (see Details).}
   \item{n}{scalar number of observations per group. Required only if \code{x} consists of 
   	calculated standard deviations.}
   \item{\dots}{Additional parameters passed to other methods. Currently not 
@@ -47,12 +49,12 @@ all groups.}
 with methods for numeric vectors, arrays, data frames, matrices and objects of 
 class \code{'ilab'}. All parameters are passed to \code{mandel.kh}.
 
-Mandel's k is an indicators of relative deviation for grouped 
+Mandel's \eqn{k} is an indicator of relative dispersion for grouped 
 sets of observations. Given a set of observations \eqn{x_{ijl}}{x[i,j,l]} where \eqn{i, j, l}
 denotes observation \eqn{l}, \eqn{l=1, 2, ... n} for measurand or test item \eqn{j} and group
 (usually laboratory) \eqn{i}, \eqn{i=1, 2, ... p}, Mandel's \eqn{k} is given by:
 
-\deqn{k=\frac{s_{ij}^2}{\sum_{i=1}^p{s_{ij}^2/p}}}
+\deqn{k=\sqrt{\frac{s_{ij}^2}{\sum_{i=1}^p{s_{ij}^2/p}}}}
 
 where \eqn{s_{ij}} is the standard deviation of values \eqn{x_{ijk}} over \eqn{k=1, 2, ..., n}. 
 
@@ -70,6 +72,8 @@ For the \code{'ilab'} method, this is "Organisation". For other methods, If \cod
 non-null, \code{rowname} is used. If \code{rowname} is NULL, the default is \code{deparse(substitute(g))};
 if \code{g} is also NULL or missing, "Row" is used.
 
+If \code{method="robust"}, Mandel's \eqn{k} is calculated by replacing the classical pooled standard 
+deviation with the robust pooled standard deviation calculated by algorithm S (see \code{\link{algS}}). 
 }
 \value{
 mandel.k returns an object of class \code{"mandel.kh"}, which is  a data frame consisting
@@ -117,5 +121,8 @@ standard measurement method. ISO, Geneva (1994).
 
 	plot(mandel.k(RM.ilab))
 	
+	#Robust variant
+	krob <- with(RMstudy, mandel.kh(RMstudy[2:9], g=Lab, type="k", method="robust"))
+	plot(krob, las=2)
 }
 \keyword{univar}
