@@ -10,13 +10,13 @@ including the uncertainty estimation method used, and will recalculate the estim
  \sQuote{uncert} or \sQuote{uncertMC} object.  Individual elements of most components can be amended.
 }
 \usage{
-\method{update}{uncert}(uncert, expr = NULL, method = NULL, x = NULL, u = NULL, c=NULL, 
+\method{update}{uncert}(object, expr = NULL, method = NULL, x = NULL, u = NULL, c=NULL, 
 		df = NULL, cov = NULL, cor = NULL, distrib = NULL, 
 		distrib.pars = NULL, delta = NULL, B = NULL, keep.x = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{uncert}{
+  \item{object}{
 An object of class \sQuote{uncert}}
   \item{expr}{An expression, formula or function.}
   \item{method}{

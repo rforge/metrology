@@ -13,15 +13,15 @@ an object of class 'uncert'.
 }
 \usage{
 \method{drop1}{uncert}(object, scope, simplify = TRUE, 
-	which=c("\% Change", "var", "u", "var.change", "u.change"))
+	which=c("\% Change", "var", "u", "var.change", "u.change"), \dots)
 
 \method{drop1}{uncertMC}(object, scope, simplify = TRUE, 
-	which=c("\% Change", "var", "u", "var.change", "u.change"))
+	which=c("\% Change", "var", "u", "var.change", "u.change"), \dots)
 
 #Print and plot methods 
-\method{print}{drop1.uncert}(x, ..., digits=2)
+\method{print}{drop1.uncert}(x, \dots, digits=2)
 
-\method{plot}{drop1.uncert}(x, ..., 
+\method{plot}{drop1.uncert}(x, \dots, 
 	which=c("\% Change", "var", "u", "var.change", "u.change"))
 }
 
@@ -45,7 +45,7 @@ an object of class 'uncert'.
  }
   \item{x}{An object of class \sQuote{drop1.uncert} returned by \code{drop1.uncert}.
 }
-  \item{...}{Further objects passed to other functions.
+  \item{\dots}{Further objects passed to other functions.
 }
   \item{digits}{number of digits used to format the output. See the \code{digits} argument
   of \code{\link{format}}.

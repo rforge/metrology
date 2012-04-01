@@ -374,8 +374,8 @@ plot.mandel.kh <- function(x, probs=c(0.95, 0.99), main,
 }
 
 
-barplot.mandel.kh <- function(x, probs=c(0.95, 0.99), main, 
-                                xlab=attr(x, "grouped.by"), ylab=attr(x, "mandel.type"),
+barplot.mandel.kh <- function(height, probs=c(0.95, 0.99), main, 
+                                xlab=attr(height, "grouped.by"), ylab=attr(height, "mandel.type"),
                                 separators=TRUE, zero.line=TRUE, ylim,  p.adjust="none", frame.plot = TRUE,
                                 ... , 
                                 col.ind=1, lty.ind=c(2,1), lwd.ind=1, 
@@ -383,18 +383,18 @@ barplot.mandel.kh <- function(x, probs=c(0.95, 0.99), main,
                                 lwd.zero=1, col.zero=1, lty.zero=1) {
                 
                 if(missing(main) ) 
-                        main <- paste(  deparse(substitute(x)), " - Mandel's", 
-                                        attr(x, "mandel.type"), 
-                                        if(attr(x, "mandel.method") == "robust") "(Robust variant)" 
+                        main <- paste(  deparse(substitute(height)), " - Mandel's", 
+                                        attr(height, "mandel.type"), 
+                                        if(attr(height, "mandel.method") == "robust") "(Robust variant)" 
                                      )
                 
-                ng <- nrow(x)
+                ng <- nrow(height)
                         #Number of groups
                         
                 
-                if(missing(ylim)) ylim <- range(pretty(c(0, na.omit(stack(x))$values)))
+                if(missing(ylim)) ylim <- range(pretty(c(0, na.omit(stack(height))$values)))
                 
-                mids <- barplot(t(as.matrix(x)), beside=TRUE, 
+                mids <- barplot(t(as.matrix(height)), beside=TRUE, 
                         ylim=ylim, main=main, xlab=xlab, ylab=ylab,   ...)
                         
                 if(separators) {
@@ -407,14 +407,14 @@ barplot.mandel.kh <- function(x, probs=c(0.95, 0.99), main,
                 
                 if( !is.na(probs[1]) ) {
                         if(p.adjust != "none" ) {
-                                probs <- 1 - p.adjust(1-probs, method=p.adjust, n = ng * ncol(x))
+                                probs <- 1 - p.adjust(1-probs, method=p.adjust, n = ng * ncol(height))
                         }
-                        if(attr(x, "mandel.type") == "h" ) {
+                        if(attr(height, "mandel.type") == "h" ) {
                                 #Mandel's h
                                 #Use 2-sided intervals
                                 probs <- 1 - (1 - probs)/2
                                 probs <- c(probs, 1-probs)
-                                if(attr(x, "mandel.method") == "classical" ) {
+                                if(attr(height, "mandel.method") == "classical" ) {
                                         abline(h=qmandelh(probs, ng), lty=lty.ind, col=col.ind, lwd=lwd.ind)
                                 } else {
                                         #Robust: use qnorm indicators
@@ -422,11 +422,11 @@ barplot.mandel.kh <- function(x, probs=c(0.95, 0.99), main,
                                 }
                         } else {
                                 #Mandel's k
-                                if(attr(x, "mandel.method") == "classical" ) {
-                                        abline(h=qmandelk(probs, ng, attr(x, "n")), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                if(attr(height, "mandel.method") == "classical" ) {
+                                        abline(h=qmandelk(probs, ng, attr(height, "n")), lty=lty.ind, col=col.ind, lwd=lwd.ind)
                                 } else {
                                         #Robust: use f(n-1, Inf)
-                                        abline(h=qf(probs, attr(x, "n")-1, Inf), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                        abline(h=qf(probs, attr(height, "n")-1, Inf), lty=lty.ind, col=col.ind, lwd=lwd.ind)
                                 }
                         }
                 

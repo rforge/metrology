@@ -10,13 +10,13 @@ Methods for the 'ilab' class.
 Functions for printing and plotting interlaboratory study objects objects of class \sQuote{ilab}.
 }
 \usage{
-\method{print}{ilab}(ilab, \dots, digits = NULL, right = FALSE)
+\method{print}{ilab}(x, \dots, digits = NULL, right = FALSE)
 
-\method{plot}{ilab}(ilab, \dots)
+\method{plot}{ilab}(x, \dots)
 }
 
 \arguments{
-  \item{ilab}{An object of class \sQuote{ilab}}
+  \item{x}{An object of class \sQuote{ilab}}
   \item{digits}{Number of digits to display in budget and (if present) distribution parameter lists.
      Passed to \code{format} for distribution parameter list and to \code{print.data.frame} 
      for output.}

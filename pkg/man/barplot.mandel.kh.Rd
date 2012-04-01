@@ -8,9 +8,9 @@ Barplot of Mandel's h or k statistics
 grouped and with appropriate indicator lines for unusual values.
 }
 \usage{
-	\method{barplot}{mandel.kh}(x, probs = c(0.95, 0.99), main,
-		xlab = attr(x, "grouped.by"), 
-		ylab = attr(x, "mandel.type"), separators = TRUE, 
+	\method{barplot}{mandel.kh}(height, probs = c(0.95, 0.99), main,
+		xlab = attr(height, "grouped.by"), 
+		ylab = attr(height, "mandel.type"), separators = TRUE, 
 		zero.line = TRUE, ylim, p.adjust = "none", 
 		frame.plot = TRUE, ..., 
 		col.ind = 1, lty.ind = c(2, 1), lwd.ind = 1, 
@@ -19,7 +19,8 @@ grouped and with appropriate indicator lines for unusual values.
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{An object of class \code{'mandel.kh'}
+  \item{height}{An object of class \code{'mandel.kh'} (the name is for consistency 
+  		with \code{barplot}).
 }
   \item{probs}{
 	Indicator lines are drawn for these probabilities. Note that

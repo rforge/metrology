@@ -8,17 +8,15 @@ The 'uncert' class
 }
 \description{
 Object returned by \code{uncert} calls.
-
-\code{summary.uncert} simply calls \code{print.uncert}.
 }
 \usage{
-   \method{print}{uncert}(uncert, digits=NULL, right=FALSE, \dots, simplify=TRUE)
+   \method{print}{uncert}(x, digits=NULL, right=FALSE, \dots, simplify=TRUE)
 
-   \method{summary}{uncert}(uncert, \dots, simplify=TRUE)
+   \method{summary}{uncert}(object, \dots, simplify=TRUE)
 
 }
 \arguments{
-  \item{uncert}{An object of class uncert}
+  \item{x, object}{An object of class uncert}
   \item{digits}{Number of digits to display in budget and (if present) distribution parameter lists.
      Passed to \code{format} for distribution parameter list and to \code{print.data.frame} 
      for output.}
@@ -29,6 +27,8 @@ Object returned by \code{uncert} calls.
     and combined uncertainty (u.y) are printed.}
 }
 \details{
+\code{summary.uncert} simply calls \code{print.uncert}.
+
 An object of class "uncert" contains:
 \describe{
   \item{call}{The matched call}

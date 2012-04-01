@@ -135,31 +135,31 @@ construct.ilab<-function(org, item, measurand, x, u, df, k, U, U.lower, U.upper,
 # Print and plot functions for ilab objects
 #
 
-print.ilab <- function(ilab, ..., digits=NULL, right=FALSE) {
+print.ilab <- function(x, ..., digits=NULL, right=FALSE) {
         maxwidth<-12L
-        if(!is.na(ilab$title[1])) {
-                for(s in ilab$title) cat(sprintf("%s\n", s))
+        if(!is.na(x$title[1])) {
+                for(s in x$title) cat(sprintf("%s\n", s))
         } else {
                 cat("Interlaboratory study:\n")
         }
         
-        if(!is.na(ilab$subset)) {
-                cat(sprintf("Subset: %s\n", ilab$subset))
+        if(!is.na(x$subset)) {
+                cat(sprintf("Subset: %s\n", x$subset))
         }
         
-        dp<-ilab$data
-        if(!is.null(ilab[["distrib", exact=TRUE]]) ) {
+        dp<-x$data
+        if(!is.null(x[["distrib", exact=TRUE]]) ) {
                 fdp<-function(x) { if(is.function(x)) deparse(x)[1] else paste(x) }
-                distrib.labels<- as.vector( sapply(ilab$distrib, fdp ) )
+                distrib.labels<- as.vector( sapply(x$distrib, fdp ) )
                 dp$distrib<-sub(paste("(.{",maxwidth,",",maxwidth,"})(.+)", sep=""), 
                         "\\1...",distrib.labels)
         }
-        if(!is.null(ilab$distrib.pars)) {
-                dp$distrib.pars <- vector("character", length=nrow(ilab$data) )
-                for(nn in 1:nrow(ilab$data) ) {
+        if(!is.null(x$distrib.pars)) {
+                dp$distrib.pars <- vector("character", length=nrow(x$data) )
+                for(nn in 1:nrow(x$data) ) {
                         dp[nn,"distrib.pars"]<-
-                                paste(names(ilab$distrib.pars[[nn]]), 
-                                        format(ilab$distrib.pars[[nn]], digits=digits),
+                                paste(names(x$distrib.pars[[nn]]), 
+                                        format(x$distrib.pars[[nn]], digits=digits),
                                         sep="=", collapse=", ")
                 }
                 
@@ -168,8 +168,8 @@ print.ilab <- function(ilab, ..., digits=NULL, right=FALSE) {
 
 }
 
-plot.ilab <- function(ilab, ...) {
-        pars<-c(list(ilab=ilab), list(...) )
+plot.ilab <- function(x, ...) {
+        pars<-c(list(x=x), list(...) )
         do.call("kplot", pars)
 }
 
@@ -177,36 +177,36 @@ plot.ilab <- function(ilab, ...) {
 # Functions to extract from ilab objects
 #
 
-subset.ilab <- function(ilab, subset, drop=FALSE, ...) {
+subset.ilab <- function(x, subset, drop=FALSE, ...) {
     if (!missing(subset)) {
         e <- substitute(subset)
-        r <- eval(e, ilab$data, parent.frame())
+        r <- eval(e, x$data, parent.frame())
         if (!is.logical(r)) 
             stop("'subset' must evaluate to logical")
         r <- r & !is.na(r)
         
-        ilab$subset <- sprintf("subset(%s, %s)", deparse(substitute(ilab)), deparse(substitute(subset)))
+        x$subset <- sprintf("subset(%s, %s)", deparse(substitute(x)), deparse(substitute(subset)))
                 
-        ilab$data<-ilab$data[r, ,drop=drop]
-        if(!is.null(ilab$distrib)) ilab$distrib <- ilab$distrib[r]
-        if(!is.null(ilab$distrib.pars)) ilab$distrib.pars <- ilab$distrib.pars[r]
+        x$data<-x$data[r, ,drop=drop]
+        if(!is.null(x$distrib)) x$distrib <- x$distrib[r]
+        if(!is.null(x$distrib.pars)) x$distrib.pars <- x$distrib.pars[r]
         
     }
 
-    return(ilab) 
+    return(x) 
 }
 
-'[.ilab' <- function(ilab, i, j) {
+'[.ilab' <- function(x, i, j) {
         
-        ilab$subset <- sprintf("%s[%s, %s]", deparse(substitute(ilab)), 
+        x$subset <- sprintf("%s[%s, %s]", deparse(substitute(x)), 
                         deparse(substitute(i)), deparse(substitute(j)))
         
-        ilab$data <- ilab$data[i,j, drop=FALSE]
+        x$data <- x$data[i,j, drop=FALSE]
 
-        if( !is.null(ilab$distrib) ) ilab$distrib <- ilab$distrib[i]
-        if( !is.null(ilab$distrib.pars) ) ilab$distrib.pars <- ilab$distrib.pars[i]
+        if( !is.null(x$distrib) ) x$distrib <- x$distrib[i]
+        if( !is.null(x$distrib.pars) ) x$distrib.pars <- x$distrib.pars[i]
                 
-        return(ilab)
+        return(x)
 }
 
 #

@@ -12,7 +12,7 @@
 mpaule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25) 
 
 \method{mpaule}{default}(x, u=NULL, n=NULL, groups=NULL, 
-                   tol=.Machine$double.eps^0.25, maxiter=25)
+                   tol=.Machine$double.eps^0.25, maxiter=25, \dots)
 
 mandel.paule(x, \dots, tol=.Machine$double.eps^0.25, maxiter=25) 
 }

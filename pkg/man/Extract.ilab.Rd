@@ -10,13 +10,13 @@ The 'ilab' class.
 Functions for manipulating interlaboratory study objects objects of class \sQuote{ilab}.
 }
 \usage{
-\method{subset}{ilab}(ilab, subset, drop=FALSE, \dots)
+\method{subset}{ilab}(x, subset, drop=FALSE, \dots)
 
-\method{[}{ilab}(ilab, i, j)
+\method{[}{ilab}(x, i, j)
 }
 
 \arguments{
-  \item{ilab}{An object of class \sQuote{ilab}}
+  \item{x}{An object of class \sQuote{ilab}}
   \item{subset}{logical expression indicating elements or rows to keep:
           missing values are taken as false.}
   \item{drop}{ passed on to '[' indexing operator.}

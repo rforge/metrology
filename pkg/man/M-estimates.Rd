@@ -15,11 +15,11 @@ and associated standard errors or standard uncertainties.
 \usage{
 MM.estimate(x, \dots)
 
-\method{MM.estimate}{default}(x, u, c = 4.685)
+\method{MM.estimate}{default}(x, u, c = 4.685, \dots)
 
 huber.estimate(x, \dots)
 
-\method{huber.estimate}{default}(x, u, k= 1.345)
+\method{huber.estimate}{default}(x, u, k= 1.345, \dots)
 }
 \arguments{
 

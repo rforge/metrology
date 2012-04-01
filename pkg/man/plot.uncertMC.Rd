@@ -6,21 +6,21 @@ Plot method for 'uncertMC' objects
 }
 \description{
 Plots for uncertainty evaluations produced by \code{uncertMC} or calls 
-to \code{uncert} with \code{method=MC} .
+to \code{uncert} with \code{method=MC}.
 }
 \usage{
-\method{plot}{uncertMC}(uncertMC, which = 1:2, 
-    main=paste("Monte Carlo evaluation -",deparse(substitute(uncertMC))), 
+\method{plot}{uncertMC}(x, which = 1:2, 
+    main=paste("Monte Carlo evaluation -",deparse(substitute(x))), 
     ask = prod(par("mfcol")) < length(which) && dev.interactive(), 
     caption = list("Histogram", "Q-Q plot", "Density", 
     "Correlation x-y", "Covariance x-y"), 
-    xlab = paste(deparse(substitute(uncertMC)), "$y", sep = ""), 
+    xlab = paste(deparse(substitute(x)), "$y", sep = ""), 
     ..., cex.caption = 1, cex.main = 1.25, lwd.y = 2, col.y = 2, lty.y,
     col.qqline = NULL, lty.qqline = NULL, lwd.qqline = NULL)
 }
 
 \arguments{
-  \item{uncertMC}{An object of class \code{uncertMC} produced by \code{uncertMC()} or to 
+  \item{x}{An object of class \code{uncertMC} produced by \code{uncertMC()} or  
     \code{uncert()} with \code{method="MC"}.
 }
   \item{which}{Integer in 1:5; the particular variant(s) of plot required. 
@@ -44,19 +44,19 @@ to \code{uncert} with \code{method=MC} .
 \details{
 For uncert objects created with methods other than MC, the plot types are:
 \describe{
-  \item{\code{which=1}}{A histogram of the MC replicates in \code{uncertMC$MC$y}, 
-     with optional line for \code{uncertMC$MC$y}. The histogram is produced using
+  \item{\code{which=1}}{A histogram of the MC replicates in \code{x$MC$y}, 
+     with optional line for \code{x$MC$y}. The histogram is produced using
      \code{hist.default}}
-  \item{\code{which=2}}{A Q-Q plot of the MC replicates in \code{uncertMC$MC$y}, 
+  \item{\code{which=2}}{A Q-Q plot of the MC replicates in \code{x$MC$y}, 
      with Q-Q line. The plot uses \code{qqnorm.default}. If \code{datax} is not
      present (in sQuote{\dots}), it is set to \code{TRUE}.}
-  \item{\code{which=3}}{A density plot of the MC replicates in \code{uncertMC$MC$y}.
+  \item{\code{which=3}}{A density plot of the MC replicates in \code{x$MC$y}.
      The plot calls \code{density.default} to calculate the density and 
      \code{plot.density} to produce the plot.}
-  \item{\code{which=4}}{A bar plot of eqn{cor(x_i,y)} if \code{uncertMC$y}
+  \item{\code{which=4}}{A bar plot of eqn{cor(x_i,y)} if \code{x$y}
      is present. Any correlation method supported by \code{stats::cor} may 
      be included in \sQuote{\dots} (e.g as \code{method="pearson"}.}
-  \item{\code{which=5}}{A bar plot of eqn{cov(x_i,y)} if \code{uncertMC$y}
+  \item{\code{which=5}}{A bar plot of eqn{cov(x_i,y)} if \code{x$y}
      is present. Any correlation method supported by \code{stats::cov} may 
      be included in \sQuote{\dots} (e.g as \code{method="pearson"}.}
 }
@@ -67,11 +67,11 @@ Only those parameters relevant to a given plot are passed to each calculation or
 plotting function, so \sQuote{\dots} can include any parameter accepted by any of the 
 functions called.
 
-For the x-y correlation and x-y covariance plot, values in \code{uncertMC$cor.xy} are 
+For the x-y correlation and x-y covariance plot, values in \code{x$cor.xy} are 
 used if available. If not, \code{stats::cor} or \code{stats::cov} is called on values 
-in \code{uncertMC$MC$y} and \code{uncertMC$MC$x} if the latter is available 
+in \code{x$MC$y} and \code{x$MC$x} if the latter is available 
 (i.e. \code{uncertMC} was called with \code{keep.x=TRUE}). If neither 
-\code{uncertMC$cor.xy} nor \code{uncertMC$MC$x} is present, or if \code{method} is 
+\code{x$cor.xy} nor \code{x$MC$x} is present, or if \code{method} is 
 unknown, the plot is skipped with a warning.
 
 }

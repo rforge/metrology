@@ -12,15 +12,15 @@ Object returned by \code{uncertMC} calls and by \code{uncertainty} with \code{me
 \code{summary.uncertMC} is currently an alias for \code{print.uncertMC}.
 }
 \usage{
-   \method{print}{uncertMC}(uncertMC, digits=NULL, right=FALSE, 
+   \method{print}{uncertMC}(x, digits=NULL, right=FALSE, 
                       \dots, simplify=TRUE, minimise=FALSE)
 
-   \method{summary}{uncertMC}(uncertMC, digits=NULL, right=FALSE, 
+   \method{summary}{uncertMC}(object, digits=NULL, right=FALSE, 
                       \dots, simplify=TRUE, minimise=FALSE)
 
 }
 \arguments{
-  \item{uncertMC}{An object of class uncert}
+  \item{x, object}{An object of class \code{"uncertMC"}}
   \item{digits}{Number of digits to display in budget and (if present) distribution parameter lists.
      Passed to \code{format} for distribution parameter list and to \code{print.data.frame} 
      for output.}

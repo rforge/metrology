@@ -10,11 +10,11 @@ the metRology package.
 A print method is provided.
 }
 \usage{
-\method{print}{loc.est}(l, ...)
+\method{print}{loc.est}(x, ...)
 }
 
 \arguments{
-  \item{l}{An object of class \sQuote{loc.est}}
+  \item{x}{An object of class \sQuote{loc.est}}
   \item{\dots}{Parameters passed to other functions. Currently unused.}
 }
 \details{

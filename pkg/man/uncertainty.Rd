@@ -15,18 +15,18 @@ Correlation is supported via either a correlation or covariance matrix.}
 \usage{
    uncert(obj, \dots)
 
-   \method{uncert}{default}(u, c, method = c("GUM", "MC"), cor, 
-            cov, distrib=NULL, distrib.pars=NULL, B=200, x=NULL, keep.x = TRUE, \dots)
+   \method{uncert}{default}(obj, c, method = c("GUM", "MC"), cor, 
+            cov, distrib=NULL, distrib.pars=NULL, B=200, x=NULL, keep.x = TRUE, u=obj, \dots)
 
-   \method{uncert}{expression}(expr, x, u, method=c("GUM", "NUM", "kragten", "k2", "MC"), 
+   \method{uncert}{expression}(obj, x, u, method=c("GUM", "NUM", "kragten", "k2", "MC"), 
             cor, cov, distrib=NULL, distrib.pars=NULL, 
             B=200, delta=0.01, keep.x = TRUE, \dots) 
 
-   \method{uncert}{function}(FUN, x, u, method=c("NUM", "kragten", "k2", "MC"), 
+   \method{uncert}{function}(obj, x, u, method=c("NUM", "kragten", "k2", "MC"), 
             cor, cov, distrib=NULL, distrib.pars=NULL, 
             B=200, delta=0.01, keep.x = TRUE, \dots)
 
-   \method{uncert}{formula}(formula, x, u, method=c("GUM", "NUM", "kragten", "k2", "MC"), 
+   \method{uncert}{formula}(obj, x, u, method=c("GUM", "NUM", "kragten", "k2", "MC"), 
             cor, cov, distrib=NULL, distrib.pars=NULL, 
             B=200, delta=0.01, keep.x = TRUE, \dots)
 
@@ -35,13 +35,10 @@ Correlation is supported via either a correlation or covariance matrix.}
   \item{obj}{An R object used for method dispatch; see below. Methods currently exist for 
      numeric vector, expression, function, or formula}
   \item{u}{For the default method, a numeric vector of standard uncertainties. For 
-     the formula or expression methods, a named list of standard uncertainties.}
+     the formula or expression methods, a named list of standard uncertainties.Note that 
+     for the default method, \code{u} is set to the value of \code{obj}, allowing 
+     specification of either as the \emph{first} argument}
   \item{c}{A numeric vector of senstivity coefficients.}
-  \item{expr}{A differentiable R expression which can be evaluated in the environment 
-     \code{x} to provide a numeric value.}
-  \item{FUN}{An R function which takes parameters from x and returns a numeric value.}
-  \item{formula}{A formula with no left-hand side (e.g. \code{~a*x+b*x^2}) which can 
-     be evaluated in the environment \code{x} to provide a numeric value.}
   \item{x}{For the expression or formula methods, an R object which can be used 
      as an environment by \code{eval}.  For the function method, a list of 
      parameters supplied to FUN via \code{do.call}.}
@@ -82,6 +79,15 @@ set of standard uncertainties and a correlation matrix (which defaults to an ide
 the correlation matrix provided to form the covariance matrix. Since the correlation 
 matrix defaults to the identity matrix, the default is combination without 
 correlation.
+
+The default method takes \code{obj} as a vector of uncertainty contributions unless \code{u} 
+is specified, in which case \code{u} is used. It is not necessary to specify both. 
+The expression method requires \code{obj} to be a differentiable R expression which can 
+be evaluated in the environment \code{x} to provide a numeric value.
+For the function method, \code{obj} must be an R function which takes parameters from x and 
+returns a numeric value.
+For the formula method, \code{obj} must be a formula with no left-hand side (e.g. \code{~a*x+b*x^2}) 
+which can be evaluated in the environment \code{x} to provide a numeric value.
 
 The formula and expression methods first calculate derivatives for the expression or formula, 
 evaluate them using the supplied values of \code{x} and then pass the resulting sensitivity 

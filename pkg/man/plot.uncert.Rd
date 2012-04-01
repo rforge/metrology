@@ -8,7 +8,7 @@ Plot method for 'uncert' objects
 Plots for uncertainty budgets produced by \code{uncert} calls.
 }
 \usage{
-\method{plot}{uncert}(uncert, which = c(1,2,4,5), main = paste(deparse(substitute(uncert))), 
+\method{plot}{uncert}(x, which = c(1,2,4,5), main = paste(deparse(substitute(x))), 
     ask = prod(par("mfcol")) < length(which) && dev.interactive(), 
     caption = list("Variance and covariance contributions", 
     expression(sqrt(group("|", "Variance and covariance contributions", "|"))), 
@@ -17,7 +17,7 @@ Plots for uncertainty budgets produced by \code{uncert} calls.
     "Covariances (x,y)"), cex.caption = 1, ...)
 }
 \arguments{
-  \item{uncert}{An object of class \code{uncert} produced by a call to \code{uncert()}.
+  \item{x}{An object of class \code{uncert} produced by a call to \code{uncert()}.
 }
   \item{which}{Integer in 1:6; the particular variant(s) of plot required. A 
      vector is permitted, in which case plots are produced in ascending order.

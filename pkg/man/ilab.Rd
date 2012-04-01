@@ -123,7 +123,7 @@ S. L. R. Ellison \email{s.ellison@lgc.co.uk}
 }
 
 \seealso{
-\code{\link{print.ilab}},  \code{\link{subset.ilab}}%,  \code{\link{plot.ilab}}
+\code{\link{print.ilab}},  \code{\link{subset.ilab}},  \code{\link{plot.ilab}}
 }
 \examples{
 data(Pb)

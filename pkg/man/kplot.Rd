@@ -36,7 +36,7 @@ kplot(x, \dots)
 	xlim.pdf, pdf.axis=FALSE, las.pdf=0, 
 	mgp.pdf=c(3,0.5,0), \dots)
 	
-\method{kplot}{ilab}(ilab, \dots)
+\method{kplot}{ilab}(x, \dots)
 
 kpoints(x,U=NULL, labels=names(x), U.lo=U, U.hi=U, k=2, 
 	strata=NULL, ordered=TRUE, order.strata=levels(strata),
@@ -47,8 +47,8 @@ kpoints(x,U=NULL, labels=names(x), U.lo=U, U.hi=U, k=2,
 
 }
 \arguments{
-  \item{x}{an R object. For the default method, a vector of reported values.}
-  \item{ilab}{an object of class \sQuote{ilab}}
+  \item{x}{an R object. For the default method, a vector of reported values. For the 
+  	ilab method, an object of class \sQuote{ilab}}
   \item{U}{Vector of length \code{length(x)} of expanded uncertainties}
   \item{labels}{Vector of of length \code{length(x)} labels for x-axis marks. }
   \item{assigned}{Assigned value for the comparison. Plotted as a horizontal line on the plot.}
