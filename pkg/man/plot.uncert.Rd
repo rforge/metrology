@@ -8,7 +8,7 @@ Plot method for 'uncert' objects
 Plots for uncertainty budgets produced by \code{uncert} calls.
 }
 \usage{
-plot.uncert(uncert, which = c(1,2,4,5), main = paste(deparse(substitute(uncert))), 
+\method{plot}{uncert}(uncert, which = c(1,2,4,5), main = paste(deparse(substitute(uncert))), 
     ask = prod(par("mfcol")) < length(which) && dev.interactive(), 
     caption = list("Variance and covariance contributions", 
     expression(sqrt(group("|", "Variance and covariance contributions", "|"))), 

@@ -9,7 +9,7 @@ Plots for uncertainty evaluations produced by \code{uncertMC} or calls
 to \code{uncert} with \code{method=MC} .
 }
 \usage{
-plot.uncertMC(uncertMC, which = 1:2, 
+\method{plot}{uncertMC}(uncertMC, which = 1:2, 
     main=paste("Monte Carlo evaluation -",deparse(substitute(uncertMC))), 
     ask = prod(par("mfcol")) < length(which) && dev.interactive(), 
     caption = list("Histogram", "Q-Q plot", "Density", 

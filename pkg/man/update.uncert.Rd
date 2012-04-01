@@ -10,7 +10,7 @@ including the uncertainty estimation method used, and will recalculate the estim
  \sQuote{uncert} or \sQuote{uncertMC} object.  Individual elements of most components can be amended.
 }
 \usage{
-update.uncert(uncert, expr = NULL, method = NULL, x = NULL, u = NULL, c=NULL, 
+\method{update}{uncert}(uncert, expr = NULL, method = NULL, x = NULL, u = NULL, c=NULL, 
 		df = NULL, cov = NULL, cor = NULL, distrib = NULL, 
 		distrib.pars = NULL, delta = NULL, B = NULL, keep.x = NULL, ...)
 }

@@ -7,7 +7,7 @@ Classical plots of Mandel's statistics.
 \code{plot.mandel.kh} produces classic plots of Mandel's statistics, suitably
 grouped and with appropriate indicator lines for unusual values.}
 \usage{
-	plot.mandel.kh(x, probs = c(0.95, 0.99), main, xlab = attr(x, "grouped.by"), 
+	\method{plot}{mandel.kh}(x, probs = c(0.95, 0.99), main, xlab = attr(x, "grouped.by"), 
 		ylab = attr(x, "mandel.type"), ylim = NULL, las = 1, 
 		axes = TRUE, cex.axis = 1, frame.plot = axes, 
 		lwd = 1, lty = 1, col = par("col"), 

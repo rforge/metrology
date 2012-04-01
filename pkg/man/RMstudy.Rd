@@ -43,7 +43,4 @@ Laboratories were coded anonymously in order of receipt of results.
 \source{
 LGC limited, Teddington, UK (Private communication).
 }
-\references{
-
-}
 \keyword{datasets}

@@ -435,6 +435,109 @@ barplot.mandel.kh <- function(x, probs=c(0.95, 0.99), main,
                 return(invisible(mids))
 }
 
+boxplot.mandel.kh <- function(x, probs=c(0.95, 0.99), main,  
+                                xlab=attr(x, "grouped.by"), ylab=attr(x, "mandel.type"),
+                                separators=FALSE, zero.line=TRUE, ylim,  p.adjust="none", 
+                                frame.plot = TRUE, horizontal=FALSE, at,
+                                ... , 
+                                col.ind=1, lty.ind=c(2,1), lwd.ind=1, 
+                                col.sep="lightgrey", lwd.sep=1, lty.sep=1,
+                                lwd.zero=1, col.zero=1, lty.zero=1,
+                                outlier.labels=row.names(x), cex.lab=0.7, col.lab=1, 
+                                adj=NULL, pos=NULL, srt=0 ) {
+                
+                if(missing(main) ) 
+                        main <- paste(  deparse(substitute(x)), " - Mandel's", 
+                                        attr(x, "mandel.type"), 
+                                        if(attr(x, "mandel.method") == "robust") "(Robust variant)" 
+                                     )
+                
+                ng <- nrow(x)
+                        #Number of groups
+                        
+                if(missing(at)) at <- 1:ncol(x)
+                if(missing(ylim)) ylim <- range(pretty(c(0, na.omit(stack(x))$values)))
+                
+                bx <- boxplot(as.matrix(x),  horizontal=horizontal, at=at,
+                        ylim=ylim, main=main, xlab=xlab, ylab=ylab,   ...)
+                        
+                if(separators) {
+                        if(length(at)> 1 ) {
+                                offset.at <- diff(at[1:2])/2
+                                sep.at <-c(at[1]-offset.at, at[1]+offset.at, at[-1]+diff(at)/2)
+                        } else {
+                                sep.at <- at+c(-0.5,0.5)
+                        }
+                        if(horizontal) 
+                                abline(h=sep.at, col=col.sep, lty=lty.sep, lwd=lwd.sep)
+                        else
+                                abline(v=sep.at, col=col.sep, lty=lty.sep, lwd=lwd.sep)
+                }
+                if(zero.line) abline(h=0, col=col.zero, lwd=lwd.zero, lty=lty.zero)
+                
+                if(frame.plot) box()
+                
+                if( !is.na(probs[1]) ) {
+                        if(p.adjust != "none" ) {
+                                probs <- 1 - p.adjust(1-probs, method=p.adjust, n = ng * ncol(x))
+                        }
+                        if(attr(x, "mandel.type") == "h" ) {
+                                #Mandel's h
+                                #Use 2-sided intervals
+                                probs <- 1 - (1 - probs)/2
+                                probs <- c(probs, 1-probs)
+                                if(attr(x, "mandel.method") == "classical" ) {
+                                        if(horizontal) 
+                                                abline(v=qmandelh(probs, ng), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                        else
+                                                abline(h=qmandelh(probs, ng), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                } else {
+                                        #Robust: use qnorm indicators
+                                        if(horizontal) 
+                                                abline(v=qnorm(probs), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                        else
+                                                abline(h=qnorm(probs), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                }
+                        } else {
+                                #Mandel's k
+                                if(attr(x, "mandel.method") == "classical" ) {
+                                        if(horizontal) 
+                                                abline(v=qmandelk(probs, ng, attr(x, "n")), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                        else
+                                                abline(h=qmandelk(probs, ng, attr(x, "n")), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                } else {
+                                        #Robust: use f(n-1, Inf)
+                                        if(horizontal) 
+                                                abline(v=qf(probs, attr(x, "n")-1, Inf), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                        else
+                                                abline(h=qf(probs, attr(x, "n")-1, Inf), lty=lty.ind, col=col.ind, lwd=lwd.ind)
+                                }
+                        }
+                
+                }
+                
+                if( ifelse(is.logical(outlier.labels[1]),outlier.labels[1], !is.na(outlier.labels[1])  ) ) {
+                        if(is.logical(outlier.labels[1])) {
+                                #Names not specified and labelling is required by TRUE: get labels
+                                outlier.labels <- row.names(x) 
+                        }
+                        #Now go find all those outlier locations in the grouped data:
+                        out.index <- rep(NA, length(bx$out))
+                        for(i in 1:length(bx$out)) {
+                                out.index[i] <- which.min( abs( x[,bx$group[i]] - bx$out[i] ) ) 
+                        }
+                        if(is.null(pos) && is.null(adj)) pos <- 4
+                        
+                        if(horizontal) 
+                                text(bx$out, at[bx$group], outlier.labels[out.index], 
+                                        cex=cex.lab, col=col.lab, pos=pos, adj=adj, srt=srt)
+                        else
+                                text(at[bx$group], bx$out, outlier.labels[out.index], 
+                                        cex=cex.lab, col=col.lab, pos=pos, adj=adj, srt=srt)
+                }
+                
+                return(invisible(bx))
+}
 
 
 

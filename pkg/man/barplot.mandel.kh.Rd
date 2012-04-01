@@ -4,11 +4,11 @@
 Barplot of Mandel's h or k statistics
 }
 \description{
-\code{plot.mandel.kh} produces a bar plot of Mandel's statistics, suitably
+\code{barplot.mandel.kh} produces a bar plot of Mandel's statistics, suitably
 grouped and with appropriate indicator lines for unusual values.
 }
 \usage{
-	barplot.mandel.kh(x, probs = c(0.95, 0.99), main,
+	\method{barplot}{mandel.kh}(x, probs = c(0.95, 0.99), main,
 		xlab = attr(x, "grouped.by"), 
 		ylab = attr(x, "mandel.type"), separators = TRUE, 
 		zero.line = TRUE, ylim, p.adjust = "none", 
@@ -61,7 +61,7 @@ grouped and with appropriate indicator lines for unusual values.
 }
   \item{\dots}{
 	Other (usually graphical) parameters passed to \code{barplot}. Note that some 
-	parameters appear after \dots to prevent spuriouos argument matching inside
+	parameters appear after \dots to prevent spurious argument matching inside
 	\code{barplot.default}.
 }
   \item{col.ind, lty.ind, lwd.ind}{
