@@ -82,12 +82,15 @@ An object of class \sQuote{ilab} consisting of:
     item	\tab	Factor of test item identifiers.   \cr
     measurand	\tab	Factor of measurands determined for each item  \cr
     x	\tab	numeric vector of reported values.  \cr
-    u	\tab	numeric vector of reported standard uncertainties or standard errors associated with x.  \cr
-    df	\tab	numeric vector of degrees of freedom associated with each reported uncertainty. Set to 
-      \code{NA} if not provided.  \cr
-    k	\tab	numeric vector of coverage factors. The coverage factor is the factor multiplying u to obtain U.  \cr
-    U	\tab	numeric or character vector of expanded uncertainties or confidence interval half-widths. 
-      Coerced to numeric but may include a character representation of interval limits; see Details.  \cr
+    u	\tab	numeric vector of reported standard uncertainties or standard 
+    		errors associated with x.  \cr
+    df	\tab	numeric vector of degrees of freedom associated with each reported
+    		uncertainty. Set to \code{NA} if not provided.  \cr
+    k	\tab	numeric vector of coverage factors. The coverage factor is the 
+    		factor multiplying u to obtain U.  \cr
+    U	\tab	numeric or character vector of expanded uncertainties or confidence 
+    		interval half-widths. \code{U} is coerced to numeric but may include
+    		a character representation of interval limits; see Details.  \cr
     U.lower, U.upper	\tab	numeric vectors of lower and upper limits for the confidence 
       interval around x.  \cr
     study	\tab	Identifier for study groups (see Arguments above).  \cr

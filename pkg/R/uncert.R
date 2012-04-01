@@ -32,7 +32,7 @@ uncert.default<-function(obj, c, method=c("GUM", "MC"), cor, cov, distrib=NULL,
                 cor.xy<-cov.xy/(u*sqrt(v))
                 names(cov.xy)<-names(cor.xy)<-names(x)
                 rv<-.construct.uncert(x=x, u=u, ci=cc, y=NA, u.y=sqrt(v), method=method, 
-                                call=match.call(), cor=cor, cov=cov, cov.xy=cov.xy, 
+                                call.uncert=match.call(), cor=cor, cov=cov, cov.xy=cov.xy, 
                                 cor.xy=cor.xy, ...)
         } else if(method=="MC") {
                 xx<-if(is.null(x)) rep(0, length(u)) else x
@@ -135,7 +135,7 @@ uncert.function<-function(obj, x, u, method=c("NUM", "kragten", "k2", "MC"), cor
                 cor.xy<-as.data.frame(t(cor.xy))
                 row.names(cor.xy)<-row.names(cov.xy)<-"theoretical"
                 rv <- .construct.uncert(expr=obj, y=y0[1], u.y=sqrt(v), x=x, u=u, ci=ci, 
-                        method=method, call=match.call(),cov=cov, cor=cor, delta=delta,
+                        method=method, call.uncert=match.call(),cov=cov, cor=cor, delta=delta,
                         cov.xy=cov.xy, cor.xy=cor.xy, ...)
         
                 
