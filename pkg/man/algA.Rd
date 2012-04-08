@@ -85,7 +85,7 @@ The implementation here differs from \code{hubers} from MASS in:
 \section{Warning }{
 Algorithm A uses the corrected median absolute deviation as the initial
 estimate of scale; an error is returned if the resulting scale estimate is 
-zero, which can occur with over 50% of the data set equal. \code{huberM} in 
+zero, which can occur with over 50\% of the data set equal. \code{huberM} in 
 the robustbase package uses an alternative scale estimate in these 
 circumstances.
 }

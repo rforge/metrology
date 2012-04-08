@@ -18,7 +18,7 @@ from a set of standard deviations
   		ranges.
 }
   \item{degfree}{Scalar number of degrees of freedom associated with all 
-  	values in \code{s}. If a vector is supplied, the \code{median{s}} will be used.
+  	values in \code{s}. If a vector is supplied,  \code{median(degfree)} will be used.
 }
   \item{na.rm}{a logical value indicating whether 'NA' values should be
           stripped before the computation proceeds.

@@ -13,17 +13,16 @@ uncertainty plotted against (relative) deviation from assigned value.
 
 duewer.plot(x, \dots)
 
-\method{duewer.plot}{default}(x, s, mu = median(x), sigma = mad(x), s0 = median(s), 
-			labels = NA, radius = 1:3, basis = c("radius", "prob"), 
-			probs = 1 - (2 * (1 - pnorm(radius))), df = NA, 
-			units = c("z", "x"), scale.x = TRUE, main, xlab, ylab, 
-			xlim, ylim, at.xax = NULL, at.yax = NULL, aspect, 
-			col.boundary = "lightgrey", lty.boundary = par("lty"), 
-			lwd.boundary = par("lwd"), label.contours = T, 
-			cex = par("cex"), cex.label = 0.7, pos = 3, adj = NULL, 
-			pos.clab = "bottomright", col.clab = col.boundary, 
-			cex.axis = par("cex.axis"), pch = par("pch"), las = par("las"), 
-			col = par("col"), bg = par("bg"), ...)
+\method{duewer.plot}{default}(x,s,mu=median(x),sigma=mad(x), s0=median(s), labels=NA,
+		radius=1:3, units=c("z","x"), 
+		main, xlab, ylab, xlim, ylim,  
+		at.xax=NULL, at.yax=NULL, aspect, 
+		col.contours="lightgrey", lty.contours=par("lty"), lwd.contours=par("lwd"),
+		label.contours=T, format.clab="p=\%4.3f",
+		cex=par("cex"), cex.label=0.7, pos=3, adj=NULL, 
+		pos.clab="bottomright", col.clab=col.contours,
+		cex.axis=par("cex.axis"), pch=par("pch"), las=par("las"), 
+		col=par("col"), bg=par("bg"), \dots)
 }
 
 \arguments{
@@ -43,24 +42,10 @@ duewer.plot(x, \dots)
 }
   \item{radius}{A vector of radii for reference lines in the classic Duewer plot.
 }
-  \item{basis}{Controls the nature of the reference or contour lines drawn on
-  the plot. See Details for specification.
-}
-  \item{probs}{A vector of probabilities for countours when \code{basis=="prob"}. 
-}
-  \item{df}{A single value for degrees of freedom, appropriate to the standard deviations 
-  \code{s}. Ignored if \code{basis=="radius"}
-}
   \item{units}{Controls scaling of the plot. If set to \code{"z"}, a classic Duewer plot 
   of \code{s/s0} vs. \code{(x-mu)/sigma} is produced. If \code{units=="x"}, the plot is 
-  drawn without scaling by \code{sigma} coordinates.
+  drawn without scaling by \code{sigma} or \code{s0}.
 }
-  \item{scale.x}{Controls scaling for contours when \code{basis="prob"}. If \code{TRUE},
-  	contours are scaled up in x by a factor \code{sqrt(df+1)}. This is appropriate when \code{sigma}
-  	is taken from the dispersion of \code{x} when \code{x} represents mean values. If 
-  	\code{sigma} represents the sd of the population from which samples of size n are averaged to 
-  	give \code{x}, \code{scale.x} should be set to \code{FALSE}.
- }
   \item{main}{Main title for the plot, passed to \code{title()}.
 }
   \item{xlab, ylab}{x- and y-axis labels, passed to \code{title()}.
@@ -72,15 +57,17 @@ duewer.plot(x, \dots)
   \item{aspect}{The aspect ratio for the plot, passed to \code{plot.window}. This defaults to 1.0 for
   	\code{basis=="radius"}, giving semicircular countours, and NA otherwise.
 }
-  \item{col.boundary, lty.boundary, lwd.boundary}{Colour, line type and line width for contour lines.
+  \item{col.contours, lty.contours, lwd.contours}{Colour, line type and line width for contour lines.
 }
   \item{label.contours}{Logical, controlling whether countour lines are labelled with approximate probabilities.
+}
+  \item{format.clab}{format string for contour labels; passed to \code{sprintf}.
 }
   \item{cex}{Expansion factor for plotted symbols.
 }
   \item{cex.label}{Expansion factor for point labels.
 }
-  \item{pos, adj}{Specifies position/adjustment of point lables. Passed to \code{text}; see \code{?text} for details.
+  \item{pos, adj}{Specifies position/adjustment of point labels. Passed to \code{text}.
 }
   \item{pos.clab}{Specification for location of contour labels. Options are '"top"', '"topright"', '"right"',
 		'"bottomright"', '"bottom"', '"bottomleft"', '"left"', '"topleft"'. A vector can be provided
@@ -110,26 +97,12 @@ and then plotting mean and sd of the scores. More recently the plot has been use
 reported values and (usually) standard uncertainties in metrology comparisons to allow
 quick assessment of anomalies within data sets.
 
-The traditional plot included visual guides in teh form of semicircular 
+The traditional plot includes visual guides in the form of semicircular 
 contours at multiples of (x-mu)/sigma for the x-axis and s/s0 for the y-axis, 
-s0 being a median or other estimate of the typical sd. This corresponds to
-\code{basis="radius"}. 
+s0 being a median or other estimate of the typical standard deviation. 
 
-In this implementation, a probabilistic basis for contours is also available. This uses 
-Helmert's distribution to provide constant likelihood contours for a known mean 
-and standard deviation.
-
-Because Helmert's distribution is for means and sd's of samples of a particular size
-from a single population, the contours show at best what might be expected if all labs
-performed similarly and when similar degrees of freedom for each sd are involved. This is
-reasonably meaningful when taking averages and sd's of the same number of observations, 
-but the contour probabilities are at best indicative in other circumstances.
-The major advantage of the Helmert-based contours is that they reflect the low 
-likelihood of very small dispersions rather better than semicircular guides around the origin.
-
-In using the probabilistic basis, note that \code{scale.x} should be set to TRUE if \code{sigma} is a simple 
-dispersion estimate taken from the observations \code{x}. For comparing with means from a population 
-of known sigma, for example when summarising z-scores with expected sd of 1.0, use  \code{scale.x=FALSE}.
+Contours are, by default, labelled with probabilities corresponding to quantiles
+of the normal distribution.
 
 }
 \value{
@@ -144,7 +117,10 @@ Duewer, D, Probably in Anal. Chem. in about 1990
 
 \seealso{
 \code{\link{axis}} for axis control, \code{\link{points}},  \code{\link{text}} for 
-plotting parameters
+plotting parameters; \code{\link{sprintf}} for contour label format. 
+
+\code{\link{xs.plot}} for a plot of location and scale data with probabilistic
+confidence regions.
 }
 \examples{
 	require(metRology)
