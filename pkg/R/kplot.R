@@ -79,7 +79,7 @@ kplot.default<-function(x,U=NULL, labels=names(x),  assigned=NULL, U.assigned=NU
         lower=x-U.lo
         if(length(k)<Lx) k <- rep(k, length.out=Lx)
         if(missing(xlim)) xlim <- c(0.5, Lx+0.5)
-        if(missing(ylim)) ylim <- range(pretty(c(upper,lower)))
+        if(missing(ylim)) ylim <- range(pretty(na.omit(c(x, upper,lower))))
         if(is.null(at.main)) at.main<-pretty(ylim)
         
                 
