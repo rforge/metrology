@@ -60,9 +60,10 @@ a list MC. The complete description is:
     (typically addditional constants passed to function or expression methods)}
   \item{cov}{The covariance matrix used}
   \item{cor}{The correlation matrix used}
-  \item{cov.xy}{A data frame of covariances between x and y. Row names correspond
-  	to the correlation method used. For \code{uncertMC} objects row names include
-  	all methods supported by stats::cor at the time the object was created.}
+  \item{cov.xy}{A data frame of covariances between x and y. The Row names correspond
+  	to the correlation method used. For \code{uncertMC} objects only
+  	\code{"pearson"} is currently supported (because \code{"kendall"} and \code{"spearman"}
+  	take a very long time to compute)}
   \item{cor.xy}{A data frame of correlations between x and y, of the same form as \code{cov.xy}}
   \item{MC}{
      A list containing:
