@@ -1,7 +1,7 @@
 #Functions for Monte Carlo 
 
-uncertMC<-function(expr, x, u, method="MC", df, cor, cov, distrib, distrib.pars, B=200, keep.x=TRUE,  ...) {
-        
+uncertMC<-function(expr, x, u, method="MC", df, cor, cov, distrib, distrib.pars, B=200, keep.x=TRUE,  vectorized=TRUE, ...) {
+
         if(method != "MC") {
                 #This mostly covers calls from update()
                 rv<-uncert(expr, x=x, u=u, method=method, cor=cor, cov=cov, distrib=distrib, 
@@ -172,16 +172,28 @@ uncertMC<-function(expr, x, u, method="MC", df, cor, cov, distrib, distrib.pars,
         constants<-list(...)
         if( is.expression(expr) ) {     
                 y0<-eval(expr, c(x, constants))
-                y<-apply(dfx, 1, function(Row,const) eval(expr, c(as.list(Row), const)), const=constants) 
+                if(!vectorized) {
+                        y<-apply(dfx, 1, function(Row,const) eval(expr, c(as.list(Row), const)), const=constants) 
+                } else {
+                        y<-eval(expr, c(dfx, constants))
+                }
         } else if( class(expr)=="formula" ) {
-                if ((le <- length(expr)) > 1) {
+            if ((le <- length(expr)) > 1) {
                 y0<-eval(expr[[2]], c(x, constants))
-                y<-apply(dfx, 1, function(Row,const) eval(expr[[2]], c(as.list(Row), const)), const=constants) 
-                } else stop("Invalid formula in uncertMC")
+                if(!vectorized) {
+                        y<-apply(dfx, 1, function(Row,const) eval(expr[[2]], c(as.list(Row), const)), const=constants) 
+                } else {
+                        y<-eval(expr[[2]], c(dfx, constants))
+                }
+            } else stop("Invalid formula in uncertMC")
                 
         } else if( is.function(expr) ) {
                 y0<-do.call(expr, c(x,...))
-                y<-apply(dfx, 1, function(Row, additional) do.call(expr, as.list(Row, additional))) 
+                if(!vectorized) {
+                        y<-apply(dfx, 1, function(Row, additional) do.call(expr, c(as.list(Row), additional)), additional=constants) 
+                } else {
+                        y <- do.call(expr, c(dfx,constants))
+                }
         }
         
         c.est <- coef( lm(y~., data=dfx) )[-1]

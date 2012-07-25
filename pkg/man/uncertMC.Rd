@@ -9,7 +9,7 @@ Monte Carlo evaluation of measurement uncertainty.
 expression or formula by Monte Carlo simulation.}
 \usage{
 uncertMC(expr, x, u, method = "MC", df, cor, cov, distrib, distrib.pars, 
-   B = 200, keep.x = TRUE,  ...)
+   B = 200, keep.x = TRUE, vectorized=TRUE, ...)
 }
 \arguments{
   \item{expr}{An expression, function, or formula with no left-hand side (e.g. 
@@ -36,6 +36,8 @@ uncertMC(expr, x, u, method = "MC", df, cor, cov, distrib, distrib.pars,
   \item{B}{Number of Monte Carlo replicates.}
   \item{keep.x}{If \code{TRUE}, the simulated replicates of \code{x} are included in 
      the return object.}
+  \item{vectorized}{If \code{TRUE}, \code{expr} is assumed to take vector arguments. If \code{FALSE}, 
+     \code{expr} is treated as if it takes scalar arguments. See Details for the difference.}
   \item{\dots}{Additional parameters to be passed to a function (for the function method)
    or used in an expression (for expression or formula method).}
 }
@@ -86,6 +88,18 @@ their associated \code{distrib} values are all \code{"norm"}, \code{mvrnorm} fro
 the MASS library is called to generate the simulated \code{x} values for those variables.
 Second, any remaining (i.e. independent) variables are simulated from their respective 
 \code{distrib} and \code{distrib.pars}. 
+
+Vectorisation makes a difference to execution speed. If \code{vectorize=TRUE}, MC evaluation 
+uses \code{eval} using the simulated data as the evaluation environment; if not, \code{apply}
+is used row-wise on the simulated input matrix. This makes an appreciable difference to 
+execution speed (typically \code{eval} is faster by a factor of 5 or more) so the default 
+assumes vectorised expressions. However, not all functions and expressions take vector arguments, 
+especially user functions involving complicated arithmetic or numerical solutions. Use \code{vectorize=FALSE}
+for functions or expressions that do not take vector arguments. 
+Note: One common symptom of an expression that does not take vector arguments is
+an R warning indicating that only the first element (typically of a parameter in \code{x}) is used. 
+uncertMC may also return NA for \code{u} on attempting to take the sd of a single simulated point.
+
 }
 \value{
 An object of class \code{uncertMC}. See \code{\link{uncertMC-class}} for details.
@@ -134,6 +148,10 @@ S. L. R. Ellison \email{s.ellison@lgc.co.uk}
   u.invexpr<-uncertMC(expr, x, u, distrib=rep("norm", 3), B=999, keep.x=TRUE )
   u.invexpr
 
+  #Look at effect of vectorize
+  system.time(uncertMC(expr, x, u, distrib=rep("norm", 3), B=9999, keep.x=TRUE ))
+  system.time(uncertMC(expr, x, u, distrib=rep("norm", 3), B=9999, keep.x=TRUE, vectorize=FALSE))
+  
 }
 
 \keyword{ univar }
