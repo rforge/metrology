@@ -31,11 +31,11 @@ msd<-function(x, s=mad , ...) {
         
         Fy<-rep(0, length(q))
         
-        n.med<-floor(n/2)       #exact for odd samples, low for even
+        n.med<-floor((n+1)/2)   #exact for odd samples, low for even
                                 #Note that for n values there are n-1 differences,
                                 #so an even-n case is an odd-median case
         
-        n<-2*n.med              #Corrects n to the lower even n
+        n<-2*n.med              #Corrects n to the next higher even n
         
         ph<-pxnorm(q,x,sd)
         
@@ -52,19 +52,29 @@ pmsd<-function(q, n, sd=1, scale=TRUE) {
         #NOTE:  In this implementation, n is the number of values, so msd 
         #       is the median of n-1 differences
         
+        L <- max(length(q), length(n), length(sd))
+        q<-rep(q, length.out=L)
+        n<-rep(n, length.out=L)
+        sd<-rep(sd, length.out=L)
+        
         if(scale) sd <- sd/sqrt(2)
 
         f<-function(x, q, n, sd=1, scale=FALSE) {
-                q<-rep(q, length(x))
+                L<-length(x)
+                q<-rep(q, length.out=L)
+                n<-rep(n, length.out=L)
+                sd <- rep(sd, length.out=L)
                 rv<-rep(0, length(x))
-                for(i in 1:length(rv)) rv[i]<-.pmsd.xnorm(q[i], x[i],  n, sd, scale)
+                for(i in 1:length(rv)) rv[i]<-.pmsd.xnorm(q[i], x[i],  n[i], sd[i], scale)
                 return(rv*dnorm(x,0,sd))
         }
         
         p <- rep(0, length(q))
         
-        for(i in 1:length(q)) p[i]<-integrate(f, lower=-Inf, upper=Inf, q=q[i], n=n, sd=sd, scale=FALSE)$value
-
+        for(i in 1:length(q)) p[i]<-integrate(f, lower=-Inf, upper=Inf, rel.tol = .Machine$double.eps^0.75, 
+                q=q[i], n=n[i], sd=sd[i], scale=FALSE)$value
+                             #Note odd tolerance; pmsd and qmsd are quite inaccurate 
+                             #(and qmsd even unstable) with default integrate() tolerance
         return(p)
         
 }
@@ -75,22 +85,27 @@ qmsd<-function(p, n, sd=1, scale=TRUE) {
         #p or n may be vectors
         #scale allows suppression of the scale parameter
         
-        if(length(p)>length(n)) {
-                n<-rep(n, length(p))
-        } else {
-                if(length(n)>length(p)) p<-rep(p, length(n))
-        }
+        L <- max(length(q), length(n), length(sd))
+        p<-rep(p, length.out=L)
+        n<-rep(n, length.out=L)
+        sd<-rep(sd, length.out=L)
 
         q<-rep(-1, length(p))
         
         q[p==0] <- 0
         q[p==1] <- +Inf
-        
+
         froot<-function(q, p, n, sd=1, scale) pmsd(q, n, sd, scale)-p
+
+        q.upper <-ifelse(p> 0.9999, 10,4) #saves a step
         
         for(i in 1:length(p)) {
+                
                 if(q[i]<0) { #Note explicit values above
-                        q[i] <- uniroot(froot, interval=c(0,10), p=p[i], n=n[i], sd=sd, scale=scale)$root
+                             #Also note odd tolerance; qmsd is quite inaccurate with default tolerance
+                        q[i] <- uniroot(froot, interval=c(0,q.upper[i]), tol=.Machine$double.eps^0.75,
+                                p=p[i], n=n[i], 
+                                sd=sd[i], scale=scale)$root
                 }
         }
 
