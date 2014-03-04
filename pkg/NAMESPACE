@@ -1,3 +1,5 @@
 exportPattern("^[^\\.]")
 importFrom(graphics, image)
+importFrom(MASS, hubers, rlm, mvrnorm)
+importFrom(numDeriv, grad)
 
