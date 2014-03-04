@@ -6,7 +6,8 @@
 # 2013-10-24: Amended references to qqplot.default and hist.default to generic; also 
 #             amended refs in formals(x.default) to use formals(getS3method("x", "default"))
 #
-
+# 2014-03-04: Amended reference to plot.density to plot
+#
 print.uncertMC<-function(x, digits=NULL, right=FALSE, ..., simplify=TRUE, minimise=FALSE){
         maxwidth<-12L
         cat("\nUncertainty evaluation\n\n")
@@ -134,7 +135,9 @@ plot.uncertMC<-function(x, which=1:2, main=paste("Monte Carlo evaluation -",depa
                         dppars<-arglist[names(arglist) %in% 
                                 unique(names(c(formals(getS3method("plot", "default")), 
                                         formals(getS3method("plot", "density")), par())))]
-                        do.call(plot.density, c(list(x=d, main=""), dppars))
+                        #do.call(plot.density, c(list(x=d, main=""), dppars))
+                        	#Explicit call removed - SLRE
+                        do.call(plot, c(list(x=d, main=""), dppars))
                         if(lwd.y >= 1) abline(v=x$y, col=col.y, lwd=lwd.y, lty=lty.y)
                         mtext(caption[[3]], side = 3, line=0.25, cex=cex.caption)
                         if(one.fig) title(main=main)
