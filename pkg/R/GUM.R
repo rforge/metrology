@@ -73,7 +73,7 @@ GUM <- function (var.name, x.i, u.i, nu.i, measurement.fnc, correlation = diag(l
     cmat = try(attr(eval(deriv(meq, var.name)), "gradient"), 
         silent = TRUE)
     if (inherits(cmat, "try-error")) {
-        #require in code with listed dependencies is deprecated - SLRE
+        #require() in code with listed Depends/Imports is deprecated - SLRE
         #if (!require(numDeriv, quietly = TRUE)) {
         #    cat("ERROR: R package numDeriv is not available\n")
         #    return(rep(NA, 2))
