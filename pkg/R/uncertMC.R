@@ -1,5 +1,11 @@
 #Functions for Monte Carlo 
-
+#
+#Author: S Ellison
+#
+#Changes:
+#
+# 2014-03-04  Removed "require(MASS)" (deprecated) - SLRE
+#
 uncertMC<-function(expr, x, u, method="MC", df, cor, cov, distrib, distrib.pars, B=200, keep.x=TRUE,  vectorized=TRUE, ...) {
 
         if(method != "MC") {
@@ -147,7 +153,6 @@ uncertMC<-function(expr, x, u, method="MC", df, cor, cov, distrib, distrib.pars,
                         stop("Correlation is only supported for normal distributions.", call.=TRUE)
                 
                 #use mvrnorm from MASS to handle correlations
-                require(MASS)
                 dfx<-as.data.frame( mvrnorm(n=B, mu=unlist(x[cor.vars]), Sigma=cov[cor.vars,cor.vars]) )
                 names(dfx)<-cor.vars.names
                 
