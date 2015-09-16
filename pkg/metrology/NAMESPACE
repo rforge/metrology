@@ -1,0 +1,7 @@
+exportPattern("^[^\\.]")
+importFrom(graphics, image)
+importFrom(MASS, hubers, rlm, mvrnorm, ginv, cov.rob, cov.mcd, cov.mve)
+importFrom(numDeriv, grad)
+importFrom(robustbase, covGK, covOGK, covMcd, scaleTau2, s_Qn, s_IQR, Qn, Sn)
+
+
