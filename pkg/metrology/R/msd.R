@@ -85,7 +85,7 @@ qmsd<-function(p, n, sd=1, scale=TRUE) {
         #p or n may be vectors
         #scale allows suppression of the scale parameter
         
-        L <- max(length(q), length(n), length(sd))
+        L <- max(length(p), length(n), length(sd))
         p<-rep(p, length.out=L)
         n<-rep(n, length.out=L)
         sd<-rep(sd, length.out=L)
