@@ -1,0 +1,46 @@
+\name{metRology-package}
+\alias{metRology-package}
+\alias{metRology}
+\docType{package}
+\title{
+\packageTitle{metRology}
+}
+\description{
+\packageDescription{metRology}
+}
+\details{
+
+The DESCRIPTION file:
+\packageDESCRIPTION{metRology}
+\packageIndices{metRology}
+The metRology package includes functions for:
+\itemize{ 
+	\item Plotting for Key Comparisons (dot-and-bar, consistency)
+	\item Uncertainty evaluation using algebraic or numeric differentiation, with support for correlation
+	\item Monte Carlo evaluation of uncertainty (including correlation for normally distributed variables)
+	\item Classes and functions for location estimates for metrology comparisons
+	\item Mandel's h and k statistics and plots for interlaboratory studies
+	\item Support functions for an excel interface
+} 
+This version (0.9-21) 
+- includes a REML location estimate in addition to vr.mle
+- enables log and log.p in dt.scaled
+}
+\author{
+\packageAuthor{metRology}
+
+Maintainer: \packageMaintainer{metRology}
+}
+%\references{
+%~~ Literature or other references for background information ~~
+&}
+%~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
+%~~ the R documentation directory ~~
+%\keyword{ package }
+%\seealso{
+%~~ Optional links to other man pages, e.g. ~~
+%~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+%}
+%\examples{
+%~~ simple examples of the most important functions ~~
+%}
