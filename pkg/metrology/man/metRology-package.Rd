@@ -9,10 +9,8 @@
 \packageDescription{metRology}
 }
 \details{
-
-The DESCRIPTION file:
-\packageDESCRIPTION{metRology}
-\packageIndices{metRology}
+%\packageDESCRIPTION{metRology}
+%\packageIndices{metRology}
 The metRology package includes functions for:
 \itemize{ 
 	\item Plotting for Key Comparisons (dot-and-bar, consistency)
@@ -24,6 +22,7 @@ The metRology package includes functions for:
 } 
 This version (0.9-21) 
 - includes a REML location estimate in addition to vr.mle
+- Adds a Youden plot, with various options for confidence ellipses
 - enables log and log.p in dt.scaled
 }
 \author{
@@ -33,7 +32,7 @@ Maintainer: \packageMaintainer{metRology}
 }
 %\references{
 %~~ Literature or other references for background information ~~
-&}
+%}
 %~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
 %~~ the R documentation directory ~~
 %\keyword{ package }
