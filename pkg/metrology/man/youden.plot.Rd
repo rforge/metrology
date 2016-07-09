@@ -12,17 +12,17 @@
 	several robust covariance measures.
 }
 \usage{
-	youden.plot(x, ...)
+youden.plot(x, ...)
 
-	yplot(x, ...)
+yplot(x, ...)
 
-	\method{youden.plot}{default}(x, y = NULL, type = c("points", "labels", "both", "outliers"), 
-		labels, probs = c(0.95, 0.99), x0, y0,  pch = par("pch"), cex = par("cex"), 
-		col = par("col"), bg = par("bg"), main, xlab, ylab,  
-		xlim = c("data", "ellipse", "all"), ylim = c("data", "ellipse", "all"), 
-		col.axes = 2, lwd.axes = 1, lty.axes = 1, cex.lab = 0.7, pos = 3, 
-		out.method = c("F", "chisq", "n"), n.out, p.out = 0.99, 
-		add = FALSE,  ...)
+\method{youden.plot}{default}(x, y = NULL, type = c("points", "labels", "both", "outliers"), 
+	labels, probs = c(0.95, 0.99), x0, y0,  pch = par("pch"), cex = par("cex"), 
+	col = par("col"), bg = par("bg"), main, xlab, ylab,  
+	xlim = c("data", "ellipse", "all"), ylim = c("data", "ellipse", "all"), 
+	col.axes = 2, lwd.axes = 1, lty.axes = 1, cex.lab = 0.7, pos = 3, 
+	out.method = c("F", "chisq", "n"), n.out, p.out = 0.99, 
+	add = FALSE,  ...)
 }
 \arguments{
   \item{x}{
