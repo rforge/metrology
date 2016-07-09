@@ -62,7 +62,7 @@ rtri<-function(n, min=-sqrt(6), max=sqrt(6), mode=(min+max)/2) {
 #t
 dt.scaled<-function(x, df, mean=0, sd=1, ncp, log = FALSE) {
         if(!log) stats::dt((x-mean)/sd, df, ncp=ncp, log=FALSE)/sd
-        else stats::dt((x-mean)/sd, df, ncp=ncp, log=FALSE)- sd
+        else stats::dt((x-mean)/sd, df, ncp=ncp, log=TRUE)- log(sd)
 }
 pt.scaled<-function(q, df, mean=0, sd=1, ncp, lower.tail = TRUE, log.p = FALSE) {
         stats::pt((q-mean)/sd, df, ncp=ncp, log.p=log.p)
