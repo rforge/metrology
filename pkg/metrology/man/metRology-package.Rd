@@ -9,8 +9,6 @@
 \packageDescription{metRology}
 }
 \details{
-%\packageDESCRIPTION{metRology}
-%\packageIndices{metRology}
 The metRology package includes functions for:
 \itemize{ 
 	\item Plotting for Key Comparisons (dot-and-bar, consistency)
@@ -35,7 +33,7 @@ Maintainer: \packageMaintainer{metRology}
 %}
 %~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
 %~~ the R documentation directory ~~
-%\keyword{ package }
+\keyword{ package }
 %\seealso{
 %~~ Optional links to other man pages, e.g. ~~
 %~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
