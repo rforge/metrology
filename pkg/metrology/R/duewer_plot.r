@@ -21,7 +21,7 @@ duewer.plot.default<-function(x,s,mu=median(x),sigma=mad(x), s0=median(s), label
         
         #pos.clab:      Contour labels for prob basis are placed approximately at the location indicated
         #               and adjusted outward appropriately. Options are "top", "topright", "right",
-        #               "bottomright", "bottom", "bottomleft", "left"’, "topleft".
+        #               "bottomright", "bottom", "bottomleft", "left", "topleft".
         #               For basis="prob" the positions are taken as provided. For basis="radius", 
         #               "bottomright" and "bottomleft" are as for "right" and "left" but just below the x-axis,
         #               and "bottom" is replaced with c("bottomright", "bottomleft").
