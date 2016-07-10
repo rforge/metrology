@@ -1,3 +1,5 @@
+dplot<-function(x, ...) UseMethod("duewer.plot")
+
 duewer.plot<-function(x, ...) UseMethod("duewer.plot")
 
 duewer.plot.default<-function(x,s,mu=median(x),sigma=mad(x), s0=median(s), labels=NA,
