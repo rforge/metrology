@@ -42,7 +42,7 @@ drop1.uncert<-function(object, scope, simplify=TRUE,
         rv[["% Change"]] <- 100*rv[,"u.change"]/u.y
         
         if(!simplify) {
-                rv <- rv[,which, drop=FALSE]
+                rv <- rv[ ,names(rv) %in% which, drop=FALSE]
                 attr(rv, "expr") <- object$expr
                 class(rv)<-c("drop1.uncert", class(rv))
                 return(rv)
@@ -136,6 +136,8 @@ plot.drop1.uncert<-function(x, ..., which=c("% Change", "var", "u", "var.change"
                 
         which <- match.arg(which, several.ok=TRUE)
 	
+        #Amended 2016-07-11 to loop over all ww in which 
+        #Simple loop to get all barplots.
         for(ww in which) {
 		pars<-list(...)
 		if(is.null(pars$main)) pars$main <- paste( deparse(substitute(x)), "- Single variable deletions")

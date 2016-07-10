@@ -19,9 +19,12 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
 } 
 This version (0.9-21) 
-- includes a REML location estimate in addition to vr.mle
-- Adds a Youden plot, with various options for confidence ellipses
-- enables log and log.p in dt.scaled
+\itemize{
+	\item includes a REML location estimate in addition to vr.mle
+	\item Adds a Youden plot, with various options for confidence ellipses
+	\item enables log and log.p in dt.scaled
+	\item amends plot.drop1.uncert to give a plot for each measure of change specified in \code{which}
+	\item corrects a grep warning appearing in drop1.uncert
 }
 \author{
 \packageAuthor{metRology}
