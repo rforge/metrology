@@ -7,9 +7,9 @@
 	Youden plots
 }
 \description{
-	A Youden plot is a bivariate scatter plot, named for its use in interlaboratory studies. 
-	This implementation includes data ellipses based on Pearson, Spearman, Kendall or 
-	several robust covariance measures.
+	A Youden plot is a bivariate scatter plot, named for its use by W. M Youden in 
+	interlaboratory studies. This implementation includes data ellipses based on Pearson, 
+	Spearman, Kendall or several robust covariance measures.
 }
 \usage{
 youden.plot(x, ...)
@@ -140,7 +140,12 @@ yplot(x, ...)
 Invisibly returns the plotted data ellipses as an object of class \code{\link{d.ellipse}}. 
 }
 \references{
-	[Pending publication]
+W.J. Youden and E.H. Steiner (1975) Statistical Manual of the AOAC. AOAC 
+International, Washington, US. ISBN 0-935584-15-3
+
+ISO 13528:2005, Statistical methods for use in proficiency testing by interlaboratory
+comparisons, International Organization for Standardization, Geneva (2005)
+
 }
 \author{
 S L R Ellison (s.ellison@lgcgroup.com)
