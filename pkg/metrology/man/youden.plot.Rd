@@ -140,7 +140,7 @@ yplot(x, ...)
 Invisibly returns the plotted data ellipses as an object of class \code{\link{d.ellipse}}. 
 }
 \references{
-W.J. Youden and E.H. Steiner (1975) Statistical Manual of the AOAC. AOAC 
+Youden, W.J. and Steiner, E.H.  (1975) \emph{Statistical Manual of the AOAC}. AOAC 
 International, Washington, US. ISBN 0-935584-15-3
 
 ISO 13528:2005, Statistical methods for use in proficiency testing by interlaboratory

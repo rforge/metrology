@@ -117,10 +117,10 @@ This list is intended to be consistent with that returned by \code{\link{cov.wt}
 
 \references{
 Maronna, R.A. and Zamar, R.H. (2002) Robust estimates of location and dispersion of 
-high-dimensional datasets; Technometrics 44(4), 307-317.
+high-dimensional datasets; Technometrics \bold{44(4)}, 307-317.
 
 Gnanadesikan, R. and John R. Kettenring (1972) Robust estimates, residuals, 
-and outlier detection with multiresponse data. Biometrics 28, 81-124
+and outlier detection with multiresponse data. Biometrics \bold{28}, 81-124
 }
 \author{
 Stephen L R Ellison
