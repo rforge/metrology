@@ -28,7 +28,7 @@ row in the data set corresponds to the mean of replicate results reported by eac
 
 Inspection of the data suggests that one laboratory interchanged or mislabelled 
 the test materials; this is hard to see in univariate plots but relatively easy 
-to see in a Youden plot (a type of pairwise scatter plot - see \code{link{youden.plot}}).
+to see in a Youden plot (a type of pairwise scatter plot - see \code{\link{youden.plot}}).
 }
 \source{
 	Private communication - Pending publication

@@ -28,7 +28,7 @@ row in the data set corresponds to the mean of replicate results reported by eac
 
 Inspection of the data suggests that one laboratory interchanged or mislabelled 
 the test materials. The anomalous results appear as an outlier for both QC and RM, as well as
-being visible as an off-diagonal outlier in a Youden plot - see \code{link{youden.plot}}).
+being visible as an off-diagonal outlier in a Youden plot - see \code{\link{youden.plot}}).
 }
 \source{
 	Private communication - Pending publication

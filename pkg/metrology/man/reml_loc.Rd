@@ -94,7 +94,7 @@ None, but see documentation for the metafor package for a more general implement
 S L R Ellison \email{s.ellison@lgc.co.uk}
 }
 \seealso{
-\code{link{loc.est-class}}
+\code{\link{loc.est-class}}
 }
 \examples{
 

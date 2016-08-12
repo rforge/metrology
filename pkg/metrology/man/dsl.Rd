@@ -82,7 +82,7 @@ Jackson et al. (2010) J Stat Plan Inf 140, 961-970
 S L R Ellison \email{s.ellison@lgc.co.uk}
 }
 \seealso{
-\code{link{loc.est-class}}
+\code{\link{loc.est-class}}
 }
 \examples{
 

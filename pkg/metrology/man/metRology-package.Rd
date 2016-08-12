@@ -21,11 +21,11 @@ The metRology package includes functions for:
 This version (0.9-21) 
   \itemize{
 	\item includes a REML location estimate in addition to vr.mle
-	\item Adds a Youden plot, with various options for confidence ellipses
+	\item adds a Youden plot (see \code{\link{yplot}}), with various options for confidence ellipses
 	\item enables log and log.p in dt.scaled
 	\item amends plot.drop1.uncert to give a plot for each measure of change specified in \code{which}
 	\item corrects a grep warning appearing in drop1.uncert
-  }
+	\item adds an improved version of \code{\link{msd}} which is faster and less memory-intensive  }
 }
 \author{
 \packageAuthor{metRology}

@@ -1,6 +1,8 @@
 #Calculates median scaled difference for observations x given sd's s
 #if s is a scalar function, it is applied to x to obtain an estimate of s
 
+#Index-based msd
+#Still O(n^2) for distance calculation, but a lot faster and lighter on RAM
 msd<-function(x, s=mad , ...) {
         ss <- if(is.function(s)) {
                 rep(s(x, ...), length(x))
@@ -12,12 +14,34 @@ msd<-function(x, s=mad , ...) {
                 }
         }
         
-        m<-abs(outer(x,x,"-")) / outer(ss,ss,FUN=function(a,b) sqrt(a^2+b^2))
-        diag(m) <- NA   #removes deviation from self
+        ss <- ss^2
         
-        return(apply(m, 1, median, na.rm=TRUE))
+        N <- 1:length(x)
         
+        structure( 
+        	sapply(N, function(n) median( abs(x[n] - x[-n])/sqrt(ss[n]+ss[-n]) ) ),
+        	names=names(x)
+        )
 }
+
+#Original msd code retained, commented, for comparison
+#msd<-function(x, s=mad , ...) {
+#        ss <- if(is.function(s)) {
+#                rep(s(x, ...), length(x))
+#        } else {
+#                if(length(s) == 1) {
+#                        rep(s, length(x))
+#                } else {
+#                        s
+#                }
+#        }
+#        
+#        m<-abs(outer(x,x,"-")) / outer(ss,ss,FUN=function(a,b) sqrt(a^2+b^2))
+#        diag(m) <- NA   #removes deviation from self
+#        
+#        return(apply(m, 1, median, na.rm=TRUE))
+#        
+#}
 
 .pmsd.xnorm<-function(q, x, n, sd=1, scale=FALSE) {
         #P for the median of abs(x-X) (optionally /sqrt(2))
