@@ -95,10 +95,11 @@ pmsd<-function(q, n, sd=1, scale=TRUE) {
         
         p <- rep(0, length(q))
         
-        for(i in 1:length(q)) p[i]<-integrate(f, lower=-Inf, upper=Inf, rel.tol = .Machine$double.eps^0.75, 
+        for(i in 1:length(q)) p[i]<-2*integrate(f, lower=0.0, upper=Inf, rel.tol = .Machine$double.eps^0.75, 
                 q=q[i], n=n[i], sd=sd[i], scale=FALSE)$value
                              #Note odd tolerance; pmsd and qmsd are quite inaccurate 
                              #(and qmsd even unstable) with default integrate() tolerance
+                             #Also note (new, 2016) restriction to (0, inf); halves exec time
         return(p)
         
 }
