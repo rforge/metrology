@@ -109,6 +109,8 @@ qmsd<-function(p, n, sd=1, scale=TRUE) {
         #on pmsd.
         #p or n may be vectors
         #scale allows suppression of the scale parameter
+
+        if(any(p >1.0) || any(p < 0.0)) stop("p must be in [0,1]")
         
         L <- max(length(p), length(n), length(sd))
         p<-rep(p, length.out=L)
@@ -120,17 +122,18 @@ qmsd<-function(p, n, sd=1, scale=TRUE) {
         q[p==0] <- 0
         q[p==1] <- +Inf
 
-        froot<-function(q, p, n, sd=1, scale) pmsd(q, n, sd, scale)-p
+        froot<-function(qq1, p, n, sd=1, scale) pmsd(qq1/(1-qq1), n, sd, scale)-p
 
-        q.upper <-ifelse(p> 0.9999, 10,4) #saves a step
+        qq1.upper <-ifelse(p > 0.9999, 1.0, 0.8) #saves a step
         
         for(i in 1:length(p)) {
                 
                 if(q[i]<0) { #Note explicit values above
                              #Also note odd tolerance; qmsd is quite inaccurate with default tolerance
-                        q[i] <- uniroot(froot, interval=c(0,q.upper[i]), tol=.Machine$double.eps^0.75,
+                        qq1 <- uniroot(froot, interval=c(0,qq1.upper[i]), tol=.Machine$double.eps^0.75,
                                 p=p[i], n=n[i], 
                                 sd=sd[i], scale=scale)$root
+                        q[i] <- qq1/(1-qq1)
                 }
         }
 
