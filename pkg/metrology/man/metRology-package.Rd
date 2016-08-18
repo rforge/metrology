@@ -18,17 +18,19 @@ The metRology package includes functions for:
 	\item Mandel's h and k statistics and plots for interlaboratory studies
 	\item Support functions for an excel interface
   } 
-This version (0.9-22) 
+This version (0.9-23) 
   \itemize{
 	\item includes a REML location estimate in addition to vr.mle
 	\item adds a Youden plot (see \code{\link{yplot}}), with various options for confidence ellipses
+	\item adds an improved version of \code{\link{msd}} which is faster and less memory-intensive 
 	\item enables log and log.p in dt.scaled
 	\item amends plot.drop1.uncert to give a plot for each measure of change specified in \code{which}
 	\item corrects a grep warning appearing in drop1.uncert
-	\item adds an improved version of \code{\link{msd}} which is faster and less memory-intensive*  }
-}
+	\item corrects an unnecessary 'missing \code{u}' error message in \code{uncert()} when \code{cov} 
+	      was specified and \code{u} was not*
+	}
 *This is the sole change from version 09.22.
-
+}
 \author{
 \packageAuthor{metRology}
 
