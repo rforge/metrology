@@ -18,18 +18,28 @@ The metRology package includes functions for:
 	\item Mandel's h and k statistics and plots for interlaboratory studies
 	\item Support functions for an excel interface
   } 
-This version (0.9-23) 
+
+Improvements in this version (0.9-23-2) from version 0.9-22 include: 
   \itemize{
-	\item includes a REML location estimate in addition to vr.mle
-	\item adds a Youden plot (see \code{\link{yplot}}), with various options for confidence ellipses
-	\item adds an improved version of \code{\link{msd}} which is faster and less memory-intensive 
-	\item enables log and log.p in dt.scaled
-	\item amends plot.drop1.uncert to give a plot for each measure of change specified in \code{which}
-	\item corrects a grep warning appearing in drop1.uncert
-	\item corrects an unnecessary 'missing \code{u}' error message in \code{uncert()} when \code{cov} 
-	      was specified and \code{u} was not*
+	\item A wholly new Youden plot (see \code{\link{yplot}}), with many options for confidence ellipses
+	\item A REML location estimate, \code{\link{reml.loc}}, in addition to \code{\link{vr.mle}};
+	      \code{reml.loc} can use means and standard uncertainties/standard errors instead of raw data 
+	      and when doing so does not require degrees of freedom. 
+	\item Incremental improvements in handling for the median scaled difference measure of anomalies.
+	      \code{\link{msd}} is faster and less memory-intensive, and \code{\link{pmsd}} now uses a 
+	      beta formulation to extend to very high \code{n} (at least 1e6 - if you feel \emph{very} 
+	      patient).
+	\item Support for \code{log} and \code{log.p} in \code{\link{dt.scaled}}.
 	}
-*This is the sole change from version 09.22.
+	      
+Corrections and bugfixes include: 
+  \itemize{
+	\item amends \code{\link{plot.drop1.uncert}} to give a plot for each measure of change specified in \code{which}
+	\item corrects a grep warning appearing in \code{drop1.uncert};
+	\item corrects an unnecessary 'missing \code{u}' error message in version 0.9-22's \code{uncert()} 
+              when \code{cov} was specified and \code{u} was not.
+	}
+
 }
 \author{
 \packageAuthor{metRology}

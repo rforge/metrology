@@ -63,7 +63,10 @@ msd<-function(x, s=mad , ...) {
         
         ph<-pxnorm(q,x,sd)
         
-        for(j in n.med:(n-1)) Fy <- Fy + choose(n-1,j) * (ph^j) * (1-ph)^(n-j-1)
+        #for(j in n.med:(n-1)) Fy <- Fy + choose(n-1,j) * (ph^j) * (1-ph)^(n-j-1)
+        for(j in n.med:(n-1)) Fy <- Fy + dbeta(ph, j+1, n-j)/n
+			#Added 2016-08-19
+			#beta formulation is considerably more stable at high N
         
         return(Fy)
         
