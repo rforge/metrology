@@ -242,7 +242,7 @@ print.d.ellipse <- function(x,  ...) {
 }
 
 
-cov.dellipse <- function(x, y=NULL, cov.method=c("spearman", "kendall","pearson","MCD","OGK","GK","gk","mcd", "mve"), 
+cov.dellipse <- function(x, y=NULL, cov.method=c("spearman", "kendall","pearson","MCD","OGK","GK","gk","rgk","mcd", "mve"), 
 	scalefn=NULL, locfn=NULL, cov.control=list()) {
 	#Returns an object of class cov.dellipse, which is a list with (at least) components
 	#    method	Character string describing method
@@ -314,7 +314,10 @@ cov.dellipse <- function(x, y=NULL, cov.method=c("spearman", "kendall","pearson"
 				class="cov.dellipse" )
 	}
 
-	if( cov.method %in% c("GK", "gk") ) {
+	if( cov.method %in% c("GK", "gk", "rgk") ) {
+		#Variants from (or based on) Gnanadesikan and Kettenring's
+		#early suggestions, using covGK from robustbase
+		#or (for rgk) a local implementation.
 		#GK relies on a scalefn but does not use a mu.too argument
 		if(is.null(cov.control$scalefn)) {
 		    #scalefn missing from cov.control: 
@@ -326,14 +329,27 @@ cov.dellipse <- function(x, y=NULL, cov.method=c("spearman", "kendall","pearson"
 		} #now have guaranteed control$scalefn
 		
 		#
-		#Consider adding Cov based on scaled X to avoid overwhelming
-		#a small variable with a large one.
 		scale <- apply(X, 2, cov.control$scalefn)
 		Cov <- if( cov.method == "GK" ) {
 			do.call( covGK, c( list( x=X[,1], y=X[,2] ), cov.control) )
 		} else if( cov.method == "gk" ) {
+			#Cov based on scaled X to avoid overwhelming
+			#a small variable with a large one.
 			prod(scale) * do.call( covGK, c( list( x=X[,1]/scale[1], y=X[,2]/scale[2] ), cov.control) )
+		} else if(cov.method == "rgk") { 
+			#This is intended to implement Gnanadesikan and Kettenring's 
+			#second covariance estimate based on scaled variables and a 
+			#ratio calculation for robust correlation rho.
+			#Advantage over "gk" is guaranteed \rho %in% [-1,1]
+			Xs <- scale(X, scale=scale)
+				#Results are independent of scaling centre; GK do not
+				#sweep out location
+			Xpm <- cbind(Xs[,1]+Xs[,2], Xs[,1]-Xs[,2] )
+			varXpm <- apply(Xpm, 2, cov.control$scalefn)^2
+			rho <- -diff(varXpm)/sum(varXpm)
+			rho * prod(scale)
 		}
+
 
 		#Get center. Choice of functions here so..
 		#Does control$scalefn have a mu.too argument?
