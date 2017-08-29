@@ -182,7 +182,8 @@ data.ellipse <- function(cov, probs=0.95, plot=TRUE, npoints=100, ...) {
 
 plot.d.ellipse <- function(x, col.ellipse=1, lty.ellipse=1, lwd.ellipse=1, fill=NA, density=NULL, angle=45, 
                 add=FALSE, npoints=100, xlim=NA, ylim=NA, 
-                prinax=FALSE, col.prinax=1, lty.prinax=1, lwd.prinax=1,  ...) {
+                prinax=FALSE, col.prinax=1, lty.prinax=1, lwd.prinax=1,  
+                xlab=NULL, ylab=NULL, ...) {
 	
         L <- length(x$ellipses)
         col <- rep(col.ellipse, length.out=L)
@@ -195,8 +196,16 @@ plot.d.ellipse <- function(x, col.ellipse=1, lty.ellipse=1, lwd.ellipse=1, fill=
 	if(!add) {
 		if(is.na(xlim[1])) xlim<-c(min(sapply(x$ellipses, function(x) range(x[,1]))), max(sapply(x$ellipses, function(x) range(x[,1])))) 
 		if(is.na(ylim[1])) ylim<-c(min(sapply(x$ellipses, function(x) range(x[,2]))), max(sapply(x$ellipses, function(x) range(x[,2])))) 
-
-		plot(mean(xlim), mean(ylim), type="n", xlim=xlim, ylim=ylim, ...) 
+		if(is.null(xlab)) {
+			xlab <-dimnames(x$cov$cov)[[1]][1]
+			if(is.null(xlab)) xlab <- "X"
+		}
+		if(is.null(ylab)) {
+			ylab <-dimnames(x$cov$cov)[[1]][2]
+			if(is.null(ylab)) ylab <- "Y"
+		}
+		
+		plot(mean(xlim), mean(ylim), type="n", xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, ...) 
 
 	} 
 

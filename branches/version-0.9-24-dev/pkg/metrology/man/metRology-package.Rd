@@ -19,7 +19,13 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
-Improvements in this version (0.9-23-2) from version 0.9-22 include: 
+Improvements in this version (0.9-25) from version 0.9-23 include: 
+  \itemize{
+	\item \code{\link{plot.d.ellipse}} now takes default \code{xlab} and \code{ylab} from 
+	      dimnames in the supplied \code{cov.dellipse}.
+	}
+
+Improvements in version 0.9-23 from version 0.9-22 include: 
   \itemize{
 	\item A wholly new Youden plot (see \code{\link{yplot}}), with many options for confidence ellipses
 	\item A REML location estimate, \code{\link{reml.loc}}, in addition to \code{\link{vr.mle}};
