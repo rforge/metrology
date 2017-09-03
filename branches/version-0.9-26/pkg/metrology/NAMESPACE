@@ -14,7 +14,8 @@ importFrom("stats", "aggregate", "as.formula", "ave", "coef", "cor",
              "lm", "mad", "mahalanobis", "median", "na.omit", "optimize", "p.adjust",
              "pbeta", "pchisq", "pnorm", "qbeta", "qchisq", "qf",
              "qnorm", "qqline", "qqnorm", "qt", "rbeta", "rchisq",
-             "rnorm", "runif", "sd", "terms", "uniroot", "var")
+             "rnorm", "runif", "sd", "terms", "uniroot", "var", 
+             "p.adjust.methods", "quantile", "symnum")
 importFrom("utils", "combn", "getS3method", "stack")
 
 S3method( MM.estimate, default )

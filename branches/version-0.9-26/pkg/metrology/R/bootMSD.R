@@ -1,5 +1,18 @@
-#Calculates parametric bootstrapped median scaled difference for observations x given sd's s
-#if s is a scalar function, it is applied to x to obtain an estimate of s
+#
+# R\bootMSD.R
+#
+
+#
+# Author: S L R Ellison
+# Created: 2016-08-30
+# This version: 2017-09-02
+# This version omits latin hypercube sampling from simulation methods
+# to reduce unnecessary package loads
+
+# lhs code is retained, commented against future development
+
+# Calculates parametric bootstrapped median scaled difference for observations x given sd's s
+# if s is a scalar function, it is applied to x to obtain an estimate of s
 
 #Define generic
 bootMSD <- function(x, ...) {
@@ -10,7 +23,7 @@ bootMSD <- function(x, ...) {
 
 bootMSD.MSD <- function(x, B=3000, probs=c(0.95, 0.99), 
 	method=c("rnorm", "lhs"), keep=FALSE, labels=names(x), ...) {
-	cat("Using MSD variant\n")
+
 	bootMSD.default(attr(x, "x"), attr(x, "s"), B=B, probs=probs, 
 		method=method, keep=keep, labels=names(x), ...)
 }
@@ -18,9 +31,6 @@ bootMSD.MSD <- function(x, B=3000, probs=c(0.95, 0.99),
 bootMSD.default<-function(x, s=mad , B=3000, probs=c(0.95, 0.99), 
 	method=c("rnorm", "lhs"), keep=FALSE, labels=names(x), ...) {
 
-	cat("Using default\n")
- 	cat(sprintf("with object of class %s\n", class(x)))
- 	
  	method <- match.arg(method)
 
         #Get standard deviations if not a vector
@@ -42,9 +52,10 @@ bootMSD.default<-function(x, s=mad , B=3000, probs=c(0.95, 0.99),
 	#Generate simulated data
 	if(method=="rnorm") {
 		m <- matrix(rnorm(B*N, mean=0, sd=ss), byrow=TRUE, ncol=N)
-	} else if(method=="lhs") {
-		require(lhs)
-		m <- sweep(qnorm(randomLHS(B, N)), MARGIN=2, STATS=ss, FUN='*')
+	# lhs code omitted in this version
+	#} else if(method=="lhs") {
+	#	require(lhs) ## Shouold be Imported for pkg if used
+	#	m <- sweep(qnorm(randomLHS(B, N)), MARGIN=2, STATS=ss, FUN='*')
 	} else {
 		stop(paste("Method", method, "not implemented"))
 	}
@@ -70,35 +81,36 @@ print.bootMSD <- function(x, ...) {
 	print(c(x$msd), ...)
 }
 
-summary.bootMSD <- function(x, p.adjust="none", digits=NULL, ...) {
+summary.bootMSD <- function(object, p.adjust="none", ...) { 
+	#'digits=NULL' removed 2017-09-02 - SLRE
 	p.adjust <- match.arg(p.adjust, p.adjust.methods)
-	p.adj <- p.adjust(x$pvals, method=p.adjust)
-	structure(c(x[c("msd", "labels", "probs", "critical.values", "pvals")], 
+	p.adj <- p.adjust(object$pvals, method=p.adjust)
+	structure(c(object[c("msd", "labels", "probs", "critical.values", "pvals")], 
 		list(p.adjust=p.adjust, p.adj=p.adj),
-		x[c('B', "method")]),
+		object[c('B', "method")]),
 		class="summary.bootMSD")
 }
 
-print.summary.bootMSD <- function(object, signif.stars = getOption("show.signif.stars"), 
-		signif.legend=signif.stars, ...) 
+print.summary.bootMSD <- function(x, digits=3, ..., signif.stars = getOption("show.signif.stars"), 
+		signif.legend=signif.stars) 
 {
 	cat("Median Scaled Difference parametric bootstrap\n")
-	cat(sprintf("%s replicates\n", format(object$B)))
-	cat(sprintf("Sampling method: %s\n", object$method))
-	cat(sprintf("P-value adjustment: %s\n", object$p.adjust))
-	df.crit <- as.data.frame(t(object$critical.values), check.names=FALSE)
+	cat(sprintf("%s replicates\n", format(x$B)))
+	cat(sprintf("Sampling method: %s\n", x$method))
+	cat(sprintf("P-value adjustment: %s\n", x$p.adjust))
+	df.crit <- as.data.frame(t(x$critical.values), check.names=FALSE)
 	names(df.crit) <- paste("Upper", names(df.crit))
-	m <- format( cbind(data.frame(MSD=object$msd, row.names=object$labels), 
-		     df.crit, "P(>MSD)"=object$p.adj) )
-	which.0 <- which(object$pvals < 1/object$B)
+	m <- format( cbind(data.frame(MSD=x$msd, row.names=x$labels), 
+		     df.crit, "P(>MSD)"=x$p.adj) )
+	which.0 <- which(x$pvals < 1/x$B)
 	if(length(which.0) > 0) {
 		#Recalculate adjusted p '+1' for zeros
-		p.plus <- p.adjust( pmax(1 + object$B * object$pvals)/object$B,
-					method=object$p.adjust )
+		p.plus <- p.adjust( pmax(1 + x$B * x$pvals)/x$B,
+					method=x$p.adjust )
 		m[["P(>MSD)"]][which.0] <- sprintf(" < %7.1e", p.plus[which.0] )
 	}
-	if (signif.stars && any( object$p.adj < 0.1 )) {
-		Signif <- symnum(object$p.adj, corr = FALSE, na = FALSE, 
+	if (signif.stars && any( x$p.adj < 0.1 )) {
+		Signif <- symnum(x$p.adj, corr = FALSE, na = FALSE, 
 		cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), 
 			symbols = c("***", "**", "*", ".", " "))
                 m <- cbind(m, " "=format(Signif))
@@ -106,7 +118,7 @@ print.summary.bootMSD <- function(object, signif.stars = getOption("show.signif.
 	       #Nothing significant so no legend
 	       signif.legend <- FALSE
 	}
- 	print(m)
+ 	print(m, digits=digits, ...)
 	if (signif.legend) {
 		#Using code borrowed from print.Coefmat ...
 		if ((w <- getOption("width")) < nchar(sleg <- attr(Signif, 
@@ -115,7 +127,7 @@ print.summary.bootMSD <- function(object, signif.stars = getOption("show.signif.
 		cat("---\nSignif. codes:  ", sleg, sep = "", fill = w + 
 		    4 + max(nchar(sleg, "bytes") - nchar(sleg)))
 	}
- 	invisible(object)
+ 	invisible(x)
 }
 
 plot.bootMSD <- function(x, ...) {
