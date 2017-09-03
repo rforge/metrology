@@ -20,8 +20,16 @@ msd<-function(x, s=mad , ...) {
         
         structure( 
         	sapply(N, function(n) median( abs(x[n] - x[-n])/sqrt(ss[n]+ss[-n]) ) ),
-        	names=names(x)
+        	names=names(x),
+        	x=x,
+        	s=sqrt(ss),
+        	class="MSD"
         )
+}
+
+print.MSD <- function(x, ...) {
+	print(c(x), ...)
+	invisible(x)
 }
 
 #Original msd code retained, commented, for comparison
