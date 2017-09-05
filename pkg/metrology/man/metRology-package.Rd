@@ -19,6 +19,16 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
+Changes in this version (0.9-26) from version 0.9-25 include: 
+  \itemize{
+	\item \code{\link{msd}} now returns an object of class \code{"MSD"} which
+	      includes the original data as attributes to permit subsequent bootstrapping.
+	\item A new function, \code{\link{bootMSD}} that performs parametric
+		bootstrapping for \code{MSD} objects to obtain critical values 
+		and \emph{p}-values for the general case where standard uncertainties/standard 
+		errors differ appreciably.
+	}
+
 Improvements in this version (0.9-25) from version 0.9-23 include: 
   \itemize{
 	\item \code{\link{plot.d.ellipse}} now takes default \code{xlab} and \code{ylab} from 

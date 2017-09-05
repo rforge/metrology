@@ -3,6 +3,8 @@
 \name{ msd }
 \Rdversion{1.1}
 \alias{ msd }
+\alias{ MSD-class }
+\alias{ print.MSD }
 
 \title{ Median scaled difference }
 \description{
@@ -33,8 +35,15 @@
 	
 }
 \value{
-	A vector of length \code{length(x)} of median scaled deviations for each observation.
+	An object of class "MSD", consisting of a vector of length \code{length(x)} of median 
+	scaled absolute deviations for each observation, with attributes:
+        \item{names}{character vector of names, taken from \code{x}}
+        \item{x}{values supplied as \code{x}}
+        \item{s}{values supplied as \code{s}}
+        
+        A print method is currently provided for the \code{"MSD"} class.
 }
+
 \seealso{
   \code{\link{pmsd}}, \code{\link{qmsd}}.
 }
