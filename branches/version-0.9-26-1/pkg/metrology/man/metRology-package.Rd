@@ -21,6 +21,7 @@ The metRology package includes functions for:
 
 Changes in this version (0.9-26-1) from version 0.9-26-0 include: 
   \itemize{
+	\item Added plot and barplot methods for MSD class. 
 	\item Minor correction to code in \code{msd} to prevent over-replication
 	      of estimated \code{s} when \code{s} is a function and returns a vector.
 	}

@@ -27,11 +27,6 @@ msd<-function(x, s=mad , ...) {
         )
 }
 
-print.MSD <- function(x, ...) {
-	print(c(x), ...)
-	invisible(x)
-}
-
 #Original msd code retained, commented, for comparison
 #msd<-function(x, s=mad , ...) {
 #        ss <- if(is.function(s)) {

@@ -3,15 +3,14 @@
 \name{ msd }
 \Rdversion{1.1}
 \alias{ msd }
-\alias{ MSD-class }
-\alias{ print.MSD }
 
 \title{ Median scaled difference }
 \description{
   Generates median of scaled differences from each point in a data set to all other points..
 }
 \usage{
-	msd(x, s=mad , \dots)
+        msd(x, s=mad , \dots)
+	
 }
 \arguments{
   \item{x}{Vector of observations}
@@ -41,11 +40,13 @@
         \item{x}{values supplied as \code{x}}
         \item{s}{values supplied as \code{s}}
         
-        A print method is currently provided for the \code{"MSD"} class.
+        
+        Print and plotting methods are currently provided for the \code{"MSD"} class; 
+        see \code{\link{MSD-class}}.
 }
 
 \seealso{
-  \code{\link{pmsd}}, \code{\link{qmsd}}.
+  \code{\link{pmsd}}, \code{\link{qmsd}}, \code{\link{MSD-class}}.
 }
 \author{
 S. L. R. Ellison \email{s.ellison@lgc.co.uk}
