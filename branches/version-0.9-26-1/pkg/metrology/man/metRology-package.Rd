@@ -19,6 +19,11 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
+Changes in this version (0.9-26-2) from version 0.9-26-1 include: 
+  \itemize{
+	\item \code{cplot} now respects \code{cex.axis} as a plot parameter. 
+	}
+
 Changes in this version (0.9-26-1) from version 0.9-26-0 include: 
   \itemize{
 	\item Added plot and barplot methods for MSD class. 
