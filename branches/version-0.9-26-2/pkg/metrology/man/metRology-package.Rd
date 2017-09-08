@@ -21,6 +21,8 @@ The metRology package includes functions for:
 
 Changes in this version (0.9-26-2) from version 0.9-26-1 include: 
   \itemize{
+	\item Fix to a bug in \code{\link{reml.loc}} which failed to report the standard uncertainty \code{u} 
+	correctly. 
 	\item \code{cplot} now respects \code{cex.axis} as a plot parameter. 
 	}
 
