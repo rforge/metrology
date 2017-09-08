@@ -1,5 +1,5 @@
 % file man/bootMSD.Rd
-% (c) 20017 S Ellison
+% (c) 2017 S Ellison
 \name{ bootMSD-class }
 \Rdversion{1.1}
 \alias{ bootMSD-class }
@@ -20,7 +20,7 @@
        \method{plot}{bootMSD}(x, ...)
 
        \method{barplot}{bootMSD}(height, ylab="MSD", names.arg=height$labels, 
-	crit.vals=FALSE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ... )
+	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ... )
 
        \method{summary}{bootMSD}(object, p.adjust="none", ...) 
 

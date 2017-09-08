@@ -135,7 +135,7 @@ plot.bootMSD <- function(x, ...) {
 }
 
 barplot.bootMSD <- function(height, ylab="MSD", names.arg=height$labels, 
-	crit.vals=FALSE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ... ) {
+	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ... ) {
 	
 	mids <- barplot(height$msd, ylab=ylab, names.arg=names.arg, ...)
 	

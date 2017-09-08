@@ -5,7 +5,7 @@
 #Still O(n^2) for distance calculation, but a lot faster and lighter on RAM
 msd<-function(x, s=mad , ...) {
         ss <- if(is.function(s)) {
-                rep(s(x, ...), length(x))
+                rep(s(x, ...), length.out=length(x))
         } else {
                 if(length(s) == 1) {
                         rep(s, length(x))
@@ -25,11 +25,6 @@ msd<-function(x, s=mad , ...) {
         	s=sqrt(ss),
         	class="MSD"
         )
-}
-
-print.MSD <- function(x, ...) {
-	print(c(x), ...)
-	invisible(x)
 }
 
 #Original msd code retained, commented, for comparison

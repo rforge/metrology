@@ -19,6 +19,20 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
+Changes in this version (0.9-26-2) from version 0.9-26-1 include: 
+  \itemize{
+	\item Fix to a bug in \code{\link{reml.loc}} which failed to report the standard uncertainty \code{u} 
+	correctly. 
+	\item \code{cplot} now respects \code{cex.axis} as a plot parameter. 
+	}
+
+Changes in this version (0.9-26-1) from version 0.9-26-0 include: 
+  \itemize{
+	\item Added plot and barplot methods for MSD class. 
+	\item Minor correction to code in \code{msd} to prevent over-replication
+	      of estimated \code{s} when \code{s} is a function and returns a vector.
+	}
+
 Changes in this version (0.9-26) from version 0.9-25 include: 
   \itemize{
 	\item \code{\link{msd}} now returns an object of class \code{"MSD"} which
