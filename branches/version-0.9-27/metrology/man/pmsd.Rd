@@ -12,9 +12,12 @@
 }
 \usage{
 	dmsd(q, n, method=c('fast', 'exact', 'even', 'asymp'), max.odd=199)
+	
 	pmsd(q, n, lower.tail = TRUE, 
-	           method=c('fast', 'exact', 'even', 'asymp'), max.odd=199)
-	qmsd(p, n, lower.tail = TRUE, method=c('fast', 'exact', 'even', 'asymp'), max.odd=199)
+		method=c('fast', 'exact', 'even', 'asymp'), max.odd=199)
+	           
+	qmsd(p, n, lower.tail = TRUE, 
+		method=c('fast', 'exact', 'even', 'asymp'), max.odd=199)
 }
 \arguments{
   \item{q}{Vector of quantiles.}
