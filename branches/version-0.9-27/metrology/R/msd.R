@@ -63,6 +63,7 @@ msd<-function(x, s=mad , ...) {
 
 pmsd <- function(q, n, lower.tail=TRUE, method=c('fast', 'exact', 'even', 'asymp'), max.odd=199) {
 	method=match.arg(method)
+	if(missing(n) && method != "asymp") stop("argument \"n\" is missing, with no default")
 	p <- switch(method,
 		fast=.pmsd.interp(q=q, N=n),
 		exact=.pmsd.exact(q=q, n=n, max.odd=max.odd),
@@ -74,6 +75,7 @@ pmsd <- function(q, n, lower.tail=TRUE, method=c('fast', 'exact', 'even', 'asymp
 
 dmsd <- function(q, n, method=c('fast', 'exact', 'even', 'asymp'), max.odd=199) {
 	method=match.arg(method)
+	if(missing(n) && method != "asymp") stop("argument \"n\" is missing, with no default")
 	switch(method,
 		fast=.dmsd.interp(q=q, N=n),
 		exact=.dmsd.exact(q=q, n=n, max.odd=max.odd),
@@ -84,6 +86,7 @@ dmsd <- function(q, n, method=c('fast', 'exact', 'even', 'asymp'), max.odd=199) 
 
 qmsd <- function(p, n, lower.tail=TRUE, method=c('fast', 'exact', 'even', 'asymp'), max.odd=199) {
 	method=match.arg(method)
+	if(missing(n) && method != "asymp") stop("argument \"n\" is missing, with no default")
 	if(!lower.tail) p <- 1-p
 	switch(method,
 		fast=.qmsd.interp(p=p, N=n),

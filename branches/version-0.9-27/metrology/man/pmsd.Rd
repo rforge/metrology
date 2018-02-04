@@ -19,11 +19,12 @@
 \arguments{
   \item{q}{Vector of quantiles.}
   \item{p}{Vector of probabilities.}
-  \item{n}{Number of observations from which msd was calculated. }
+  \item{n}{Number of observations from which msd was calculated. Unused (and can be missing)
+           for \code{method="asymp"}}
   \item{lower.tail}{logical; if TRUE (the default), probabilities are P[X <= x];
           otherwise, P[X > x]. }
   \item{method}{Calculation method. See details.}
-  \item{max.odd}{Hihest odd \code{n} for which exact values are calculated.}
+  \item{max.odd}{Highest odd \code{n} for which exact values are calculated.}
 }
 \details{
 	
@@ -54,6 +55,9 @@
 	machine running at 1-2GHz). \code{qmsd} with \code{method="exact"} is obtained by root-finding from 
 	\code{pmsd(..., method="excat")} using \code{uniroot}, and is over an order of magnitude slower than 
 	\code{pmsd} pmsd. 
+	
+	For \code{method="exact"}, asymptotic (large \eqn{n}) probabilities, densities and quantiles are 
+	returned. \code{n} is unused and can be missing. 
 	
 	For \code{method="exact"}, odd \code{n} above \code{max.odd} are replaced with the next lower 
 	even value.  This  provides a fair approximation for \code{n} above 30 (though the fast method is better)
