@@ -49,7 +49,10 @@ msd<-function(x, s=mad , ...) {
         
         structure( 
         	sapply(N, function(n) median( abs(x[n] - x[-n])/sqrt(ss[n]+ss[-n]) ) ),
-        	names=names(x)
+        	names=names(x),
+        	x=x,
+        	s=sqrt(ss),
+        	class=c("MSD", "numeric")
         )
 }
 
@@ -470,7 +473,9 @@ qmsd <- function(p, n, lower.tail=TRUE, method=c('fast', 'exact', 'even', 'asymp
 	
 	fn.findx <- function(x, q)  pxnorm(q, from.qq1(x), sd=1/sqrt(2))-0.5
 	
-	if(q <= qnorm(0.75)/sqrt(2)) NA else uniroot(fn.findx, c(0,1), q=q)$root
+	if(q == Inf) return(1.0) else
+	if(q <= qnorm(0.75)/sqrt(2)) NA 
+	else uniroot(fn.findx, c(0,1), q=q)$root
 }
 
 .pmsd.asymp <- function(q) {
