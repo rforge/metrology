@@ -10,5 +10,5 @@ Description: Provides classes and calculation and plotting functions
  for metrology applications, including measurement uncertainty estimation
  and inter-laboratory metrology comparison studies. 
 License: GPL (>= 2)
-URL: http://metrology.sourceforge.net
+URL: https://r-forge.r-project.org/projects/metrology/
 
