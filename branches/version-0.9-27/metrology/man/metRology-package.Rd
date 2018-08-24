@@ -19,6 +19,16 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
+Changes in this version (0.9-27) from version 0.9-26-2 include: 
+  \itemize{	
+	\item \code{pmsd} and related functions will now use fast interpolation by default, and
+	provide exact values for odd- and even-\eqn{n} data sets. Exact integration is 
+	available.
+	
+  	\item \code{gplot} (called by \code{plot.mandel.kh}) now has a \code{spacing} parameter
+	which allows finer control of vertical line spacing. 
+ }
+
 Changes in this version (0.9-26-2) from version 0.9-26-1 include: 
   \itemize{
 	\item Fix to a bug in \code{\link{reml.loc}} which failed to report the standard uncertainty \code{u} 
