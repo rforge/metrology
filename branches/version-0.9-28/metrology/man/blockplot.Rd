@@ -140,7 +140,7 @@ for each data point.
    	\item whether axes are plotted on any of the four sides of the plot;
    	\item the appearance or omission of empty groups.
    }
-   See \code{\link{bxp}} for further details.  
+   See \code{\link{bkp}} for further details.  
 }
 
 \value{Blockplot currently returns an object of class \code{blockplot}, which is a list with elements:
