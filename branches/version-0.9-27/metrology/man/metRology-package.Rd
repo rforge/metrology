@@ -19,31 +19,30 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
-Changes in this version (0.9-27) from version 0.9-26-2 include: 
+Changes in version 0.9-27-2 from version 0.9-26-2 include: 
   \itemize{	
 	\item \code{pmsd} and related functions will now use fast interpolation by default, and
-	provide exact values for odd- and even-\eqn{n} data sets. Exact integration is 
-	available.
+	provide exact values for both odd- and even-\eqn{n} data sets up to \eqn{n=199}. 
 	
   	\item \code{gplot} (called by \code{plot.mandel.kh}) now has a \code{spacing} parameter
 	which allows finer control of vertical line spacing. 
  }
 
-Changes in this version (0.9-26-2) from version 0.9-26-1 include: 
+Changes in version 0.9-26-2 from version 0.9-26-1 include: 
   \itemize{
 	\item Fix to a bug in \code{\link{reml.loc}} which failed to report the standard uncertainty \code{u} 
 	correctly. 
 	\item \code{cplot} now respects \code{cex.axis} as a plot parameter. 
 	}
 
-Changes in this version (0.9-26-1) from version 0.9-26-0 include: 
+Changes in version 0.9-26-1 from version 0.9-26-0 include: 
   \itemize{
 	\item Added plot and barplot methods for MSD class. 
 	\item Minor correction to code in \code{msd} to prevent over-replication
 	      of estimated \code{s} when \code{s} is a function and returns a vector.
 	}
 
-Changes in this version (0.9-26) from version 0.9-25 include: 
+Changes in version 0.9-26 from version 0.9-25 include: 
   \itemize{
 	\item \code{\link{msd}} now returns an object of class \code{"MSD"} which
 	      includes the original data as attributes to permit subsequent bootstrapping.
@@ -53,7 +52,7 @@ Changes in this version (0.9-26) from version 0.9-25 include:
 		errors differ appreciably.
 	}
 
-Improvements in this version (0.9-25) from version 0.9-23 include: 
+Improvements in version 0.9-25 from version 0.9-23 include: 
   \itemize{
 	\item \code{\link{plot.d.ellipse}} now takes default \code{xlab} and \code{ylab} from 
 	      dimnames in the supplied \code{cov.dellipse}.
