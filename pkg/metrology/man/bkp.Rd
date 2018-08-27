@@ -14,7 +14,8 @@ It is normally called from within \code{blockplot} but can be invoked directly.
             grp.spacing = 2, grp.at = NA, 
             fill = NA, border = NULL, density = NULL, angle = 45, 
             lty = 1, lwd = 2, label.col = 1, cex = NA, adj = c(0.5, 0.4), 
-            uline = 2, uline.lwd = lwd, uline.lty = 1, uline.col = if (!is.null(border)) border else par("fg"), 
+            uline = 2, uline.lwd = lwd, uline.lty = 1, 
+            uline.col = if (!is.null(border)) border else par("fg"), 
             grp.labs = FALSE, grp.pos = 1, glab.control = list(), 
             axes = c(TRUE, FALSE), asp = NA, frame.plot = any(axes), 
             drop.unused = TRUE, unused.label="[Missing]", ...)
