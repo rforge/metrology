@@ -56,7 +56,7 @@ population variances are involved., Biometrika \bold{34} 28-35
 
 }
 \author{
-S. L. R. Ellison \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
 
 \seealso{

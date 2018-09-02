@@ -90,7 +90,7 @@ Calling \code{base::cbind} directly will provide a work-around if necessary.
 \references{
 None, yet.}
 \author{
-S. L. R. Ellison \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
 
 

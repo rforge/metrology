@@ -89,7 +89,7 @@
   \code{\link{plot.bootMSD}}, \code{\link{summary.bootMSD}}.
 }
 \author{
-S. L. R. Ellison \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
 \examples{
 

@@ -49,7 +49,7 @@
   \code{\link{pmsd}}, \code{\link{qmsd}}, \code{\link{MSD-class}}.
 }
 \author{
-S. L. R. Ellison \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
 \examples{
 

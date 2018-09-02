@@ -177,16 +177,16 @@ print.uncert<-function(x, digits=NULL, right=FALSE, ..., simplify=TRUE){
         }
         if(!is.null(x$MC) ) {
                 cat(sprintf("\nMonte Carlo evaluation using %d replicates:\n", x$B))
-                cat("\n   y:\n")
+                cat("\n   y*:\n")
                 if(simplify) {
                         print(summary(x$MC$y))
                 } else {
                         print(x$MC$y)
-                        if(!is.null(x$MC$x) ) {
-                                cat("\nMC x:\n")
-                                print(x$MC$x)
-                        }
                 }
+		if(!is.null(x$MC$x) ) { #Always printed as summary if present
+			cat("\nMC x*:\n")
+			print(x$MC$x)
+		}
         }
         invisible(x)
 }

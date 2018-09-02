@@ -163,7 +163,7 @@ calculation of combined standard uncertainties, Accred. Qual. Assur. \bold{10}, 
 
 }
 \author{
-S. L. R. Ellison \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
 \seealso{
   \code{\link{uncert-class}},  \code{\link[stats]{deriv}}

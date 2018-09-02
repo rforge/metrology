@@ -125,7 +125,7 @@ of uncertainty in measurement}. \url{http://www.bipm.org/utils/common/documents/
 of uncertainty in measurement} (1995) ). 
 }
 \author{
-S. L. R. Ellison \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
 
 \seealso{

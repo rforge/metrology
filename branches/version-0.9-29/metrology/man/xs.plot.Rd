@@ -179,7 +179,7 @@ Likelihood,Clarendon Press, Oxford, pp258-9
 W Kruskal, American Mathematical Monthly 53, 435-438, (1946)
 
 }
-\author{S Ellison \email{s.ellison@lgc.co.uk}
+\author{S Ellison \email{s.ellison@lgcgroup.com}
 }
 
 \seealso{

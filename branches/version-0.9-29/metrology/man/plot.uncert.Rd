@@ -83,7 +83,7 @@ Objects created with the MC method are passed to \code{\link{plot.uncertMC}}.
 None.
 }
 \author{
-S. L. R. Ellison, \email{s.ellison@lgc.co.uk}
+S. L. R. Ellison, \email{s.ellison@lgcgroup.com}
 }
 
 \seealso{

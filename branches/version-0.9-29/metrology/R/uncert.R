@@ -1,3 +1,6 @@
+#
+# To do: Add df handling to uncert functions, at least as 'pass-through' to construct.uncert.
+#
 
 uncert<-function(obj, ...){
         UseMethod("uncert")
