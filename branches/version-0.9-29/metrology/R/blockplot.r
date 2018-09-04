@@ -168,7 +168,7 @@ blockplot.default <- function(x, breaks="23", labels=paste(1:length(x)), groups=
 	rv <- list(x=x, groups=if(ng>1) g else NA, breaks=breaks, labels=labels,
 		x.left=x.left, x.height=x.height, x.mid=x.mid)
 
-	if(plot) bkp(rv, xlim = xlim, ylim = ylim, main = main, xlab = main, ylab=ylab, 
+	if(plot) bkp(rv, xlim = xlim, ylim = ylim, main = main, xlab = xlab, ylab=ylab, 
 		grp.labs=grp.labs,  add=add, ... )
 	
 	return(invisible( structure(rv, class=c("blockplot", "list") ) ))
@@ -434,6 +434,8 @@ bkp <- function(x, labels=x$labels, xlim = NULL, ylim = NULL,
 					
 				} else { #glab.automatic placement as per 'legend'
 					    usr <- par("usr")
+					    grp.mid.y <- offset + grp.at[ig] + 0.5 + 
+					    		sum( range(x$x.height, na.rm = TRUE) )/2
 					    glab.x <- switch(grp.pos[ig], 
 					    		bottomright = , topright = , right = usr[2L],
 					    		bottomleft = , left = , topleft = usr[1L], 
