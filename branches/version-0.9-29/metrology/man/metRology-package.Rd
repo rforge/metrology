@@ -19,10 +19,15 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
-Changes in version 0.9-29-0 from version 0.9-28-0 include: 
+Changes in version 0.9-29-0 from version 0.9-28-1 include: 
   \itemize{	
 	\item Group label placement in \code{blockplot} has been extended to take \code{\link{legend}}-like
 	      character specification.
+ }
+Changes in version 0.9-28-1 from version 0.9-28-0 include: 
+  \itemize{	
+	\item Fixed \code{blockplot} x-axis label, which was incorrect.
+ 
  }
 Changes in version 0.9-28-0 from version 0.9-27-2 include: 
   \itemize{	
