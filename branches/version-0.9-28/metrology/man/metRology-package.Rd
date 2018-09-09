@@ -19,8 +19,10 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
-Changes in version 0.9-28-1 from version 0.9-28-0 include: 
+Changes in version 0.9-28-2 from version 0.9-28-0 include: 
   \itemize{	
+	\item Fixed an error occurring in \code{barplot.bootMSD} when \code{names.arg}
+	      was unspecified and the boot object had no labels.
 	\item Fixed \code{blockplot} x-axis label, which was incorrect.
  
  }
