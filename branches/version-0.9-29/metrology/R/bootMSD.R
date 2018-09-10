@@ -135,11 +135,22 @@ plot.bootMSD <- function(x, ...) {
 }
 
 barplot.bootMSD <- function(height, ylab="MSD", names.arg=height$labels, 
-	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ... ) {
+	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ylim=NULL, ... ) {
 	
 	if(is.null(names.arg)) names.arg <- paste(1:length(height$msd))
 	
-	mids <- barplot(height$msd, ylab=ylab, names.arg=names.arg, ...)
+	if(is.null(ylim) ) {
+		if( crit.vals ) {
+			# If plotting crit vals, 
+			# make sure range includes critical values too
+			ylim <- range(pretty(c(0, height$msd, height$critical.values)))
+			
+		} else {
+			ylim <- range(pretty(height$msd))
+		}
+	}
+
+	mids <- barplot(height$msd, ylab=ylab, names.arg=names.arg, ylim=ylim, ...)
 	
 	if(crit.vals && length(na.omit(height$probs)) > 0) {
 		ncrit <- length(height$probs)
