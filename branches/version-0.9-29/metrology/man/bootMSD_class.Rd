@@ -20,7 +20,7 @@
        \method{plot}{bootMSD}(x, ...)
 
        \method{barplot}{bootMSD}(height, ylab="MSD", names.arg=height$labels, 
-	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ... )
+	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), ylim=NULL, ... )
 
        \method{summary}{bootMSD}(object, p.adjust="none", ...) 
 
@@ -61,6 +61,9 @@
 	Vectors of line style parameters for plotted critical values, passed to 
 	\code{\link{segments}}. Recycled to the length of \code{critical.values}
 	in the supplied \code{bootMSD} object.}
+   \item{ylim}{Limits for plot y range, passed to \code{\link{barplot}}. The default 
+   	ensures that the plotted bars and (if \code{crit.vals=TRUE}) the critical 
+   	values are included in the figure region.}
    \item{digits}{integer; passed to \code{print}. The minimum number of
           significant digits to be printed in values. Change to \code{NULL} for default.}
    \item{signif.stars}{logical; if \code{TRUE}, P-values are additionally encoded
