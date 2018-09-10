@@ -39,12 +39,11 @@
   \item{crit.vals}{
 	If \code{TRUE}, horizontal lines at critical values are added to the plot. 
 	These are calculated by \code{link{qmsd}} based on supplied values of 
-	\code{probs}, \code{n} and \code{multiple}. 
+	\code{probs} and \code{n}. 
 	}
   \item{lty.crit, col.crit, lwd.crit}{
 	Vectors of line style parameters for plotted critical values, passed to 
-	\code{\link{segments}}. Recycled to the length of \code{critical.values}
-	in the supplied \code{bootMSD} object.}
+	\code{\link{abline}}. }
    \item{probs}{vector of probabilities at which critical values are drawn.}
    \item{n}{integer number of observations for critical value calculation; passed to 
             \code{\link{qmsd}}.}
