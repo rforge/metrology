@@ -19,11 +19,20 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
-Changes in version 0.9-29-0 from version 0.9-28-1 include: 
+Changes in version 0.9-29-1 from version 0.9-28-1 include: 
   \itemize{	
-	\item Group label placement in \code{blockplot} has been extended to take \code{\link{legend}}-like
-	      character specification.
+	\item A new set of functions for pair-difference chi-squared statistics; see 
+	      \code{\link{pdchisq}} and \code{\link{bootPDchisq}}.
+	\item Group label placement in \code{blockplot} has been extended to take 
+	      \code{\link{legend}}-like character specification.
  }
+ WARNING: The addition of a new pairwise statistic involves significant 
+ duplication of code used for the bootMSD class. Future versions are likely
+ to use common bootstrap code and classes for both MSD and PDchisq classes.
+ bootMSD.default is accordingly deprecated and may be removed or
+ reduced to a wrapper for boot.mtr.pairwise, the current workhorse
+ for bootPDchisq. 
+ 
 Changes in version 0.9-28-1 from version 0.9-28-0 include: 
   \itemize{	
 	\item Fixed \code{blockplot} x-axis label, which was incorrect.

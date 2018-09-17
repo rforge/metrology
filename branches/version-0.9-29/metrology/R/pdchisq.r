@@ -53,7 +53,6 @@ pdchisq <- function(x, s=sd, cov=NULL, cor = NULL, na.rm=FALSE, ...) {
         	s=sqrt(diag(Cov)),
         	cov=cov,
         	cor=cor,
-        	stat="PDchisq",
         	class=c("PDchisq", "mtr.paircomp", "numeric")
         )
 }
@@ -65,13 +64,17 @@ print.PDchisq <- function(x, ...) {
 	invisible(x)
 }
 
-plot.PDchisq <- function(x, type='h', ylab="Pair-difference chi-squared", ...) {
+plot.PDchisq <- function(x, type='h', ylab="Pair-difference chi-squared", ylim=NULL, ...) {
 	plot.local<-function(x, y, axes, ...) plot(x, y, axes=FALSE, ...)
 	ldots<-list(...)
 	axes <- if(is.null(ldots$axes)) TRUE else ldots$ann 
 	frame.plot <- if(is.null(ldots$frame.plot)) axes else ldots$frame.plot 
 	
-	plot.local(1:length(x), c(x), type=type, ylab=ylab, ...)
+	if(is.null(ylim) ) {
+		ylim <- range(pretty(c(0, x)))
+	}
+	
+	plot.local(1:length(x), c(x), type=type, ylab=ylab, ylim=ylim, ...)
 	if(frame.plot) box()
 	if(axes) {
 		axis(1, at=1:length(x), labels=names(x), ...)
@@ -82,9 +85,13 @@ plot.PDchisq <- function(x, type='h', ylab="Pair-difference chi-squared", ...) {
 
 barplot.PDchisq <- function(height, ylab="Pair-difference chi-squared", names.arg=names(height), 
 	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), 
-	probs=c(0.95, 0.99), n=length(height), ... ) {
+	probs=c(0.95, 0.99), n=length(height), ylim=NULL, ... ) {
 	
 	if(is.null(names.arg)) names.arg <- paste(1:length(height))
+	
+	if(is.null(ylim) ) {
+		ylim <- range(pretty(c(0, height)))
+	}
 	
 	mids <- barplot(as.vector(height), ylab=ylab, names.arg=names.arg, ...)
 	
@@ -97,7 +104,8 @@ barplot.PDchisq <- function(height, ylab="Pair-difference chi-squared", names.ar
 bootPDchisq <- function(x, B=3000, probs=c(0.95, 0.99), 
 	method=c("rnorm", "lhs"), keep=FALSE, labels=names(x), ...) {
 
-	boot.mtr.pairwise(attr(x, "x"), attr(x, "s"), B=B, probs=probs, 
-		method=method, keep=keep, labels=names(x), stat="PDchisq", ...)
+	boot.mtr.pairwise(x=attr(x, "x"), s=attr(x, "s"), B=B, 
+		cov=attr(x, "cov"), cor=attr(x, "cor"), probs=probs,
+		stat="PDchisq", method=method, keep=keep, labels=names(x), ...)
 }
 

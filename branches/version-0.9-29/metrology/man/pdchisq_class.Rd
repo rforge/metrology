@@ -15,11 +15,11 @@
 \usage{
        \method{print}{PDchisq}(x, ...)
 
-       \method{plot}{PDchisq}(x, type="h", ylab="Pair-difference chi-squared", ...)
+       \method{plot}{PDchisq}(x, type="h", ylab="Pair-difference chi-squared", ylim=NULL, ...)
 
        \method{barplot}{PDchisq}(height, ylab="Pair-difference chi-squared", names.arg=names(height), 
 	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), 
-	probs=c(0.95, 0.99), n=length(height), ... )
+	probs=c(0.95, 0.99), n=length(height), ylim=NULL, ... )
 
 	bootPDchisq(x, B=3000, probs=c(0.95, 0.99), 
 		method=c("rnorm", "lhs"), keep=FALSE, labels=names(x), ...)
@@ -53,6 +53,8 @@
    \item{n}{integer number of observations (NOT degrees of freedom) for critical value 
    	calculation; used (as \eqn{n-1}) by \code{\link{qchisq}}. See Details.}
    \item{B}{integer number of bootstrap replicates; passed to \code{boot.mtr.pairwise}.}
+   \item{ylim}{Limits for y-axis. the default makes sure the axis begins at zero and includes 
+        all values}
    \item{method}{simulation method; passed to \code{boot.mtr.pairwise}.}
    \item{keep}{logical, indicating whether to retain simulated values. 
    	Passed to \code{boot.mtr.pairwise}.}
@@ -78,18 +80,26 @@
    	is distributed approximately as \eqn{\chi^2(n-1)}{chi-squared(n-1)}. At the other 
    	extreme, if a single value has very large uncertainty \eqn{s} compared to others, 
    	its pair-difference chi-squared is distributed approximately as \eqn{\chi^2(1)}{chi-squared(1)}.
+   	
+   	\code{bootPDchisq} generates a parametric bootstrap (Monte carlo simulation) 
+   	      from an object of class \code{"PDchisq"}. This provides a case-specific test 
+   	      of the null that all mean values are equal, with the uncertainties and/or
+   	      covariances accurate. \code{bootPDchisq} is a wrapper for 
+   	      \code{\link{boot.mtr.pairwise}}, which provides further information. 
 }
 \value{
 	The \code{print} method returns the object, invisibly.
 	
 	The \code{plot} method returns NULL, invisibly.
 	
-	The \code{barplot} methods return the values at the midpoint of each bar.
+	The \code{barplot} method returns the values at the midpoint of each bar.
 	
+	\code{bootPDchisq} returns an object of class \code{"bootMtrPairs"}; see
+	\code{\link{bootMtrPairs-class}} for details.
 }
 
 \seealso{
-  \code{\link{pdchisq}}, \code{\link{qchisq}}.
+  \code{\link{pdchisq}}, \code{\link{qchisq}}, \code{\link{bootMtrPairs-class}}.
 }
 \author{
 S. L. R. Ellison \email{s.ellison@lgcgroup.com}

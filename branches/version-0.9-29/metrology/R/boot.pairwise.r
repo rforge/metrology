@@ -3,9 +3,11 @@
 #
 
 boot.mtr.pairwise<-function(x, s=mad , B=3000, probs=c(0.95, 0.99), cov=NULL, cor = NULL, 
-	method=c("rnorm", "lhs"), keep=FALSE, labels=names(x), stat="PDchisq", ...) {
-	#stat=c("PDchisq", "MSD"),
+	 stat=c("MSD", "PDchisq"), method=c("rnorm", "lhs"), keep=FALSE, 
+	 labels=names(x), ...) {
+
  	method <- match.arg(method)
+	
 	stat <- match.arg(stat)
 	
         #Get standard deviations if not a vector
@@ -23,7 +25,7 @@ boot.mtr.pairwise<-function(x, s=mad , B=3000, probs=c(0.95, 0.99), cov=NULL, co
         #c() strips unwanted attributes from msd object
         t0 <- switch(stat, 
 			MSD=c(msd(x, ss)),
-			PDchisq=c(pdchisq(x, ss, cov=cov, cor = cor ))
+			PDchisq=c(pdchisq(x, ss, cov=cov, cor = cor))
 		     )
 
 	N <- length(x)
@@ -42,7 +44,8 @@ boot.mtr.pairwise<-function(x, s=mad , B=3000, probs=c(0.95, 0.99), cov=NULL, co
 	#Generate the simulation
 	t <- switch(stat, 
 		MSD=t(apply(m, 1, function(x, s) as.vector(msd(x, s)), s=ss)),
-		PDchisq=t(apply(m, 1, function(x, s) as.vector(pdchisq(x, s, ...)), s=ss))
+		PDchisq=t(apply(m, 1, function(x, s, ...) as.vector(pdchisq(x, s, ...)), 
+			s=ss, cov=cov, cor=cor))
 	     )
 
 	#Quantiles (critical values)
@@ -96,7 +99,7 @@ print.summary.bootMtrPairs <- function(x, digits=3, ..., signif.stars = getOptio
 	}
 	
 	names(m)[c(1, length(m))] <- switch(x$stat, 
-		msd=c("MSD", "P(>MSD)"), 
+		MSD=c("MSD", "P(>MSD)"), 
 		PDchisq=c("PDchisq", "P(>PDchisq)"))
 	
 	if (signif.stars && any( x$p.adj < 0.1 )) {
@@ -137,7 +140,7 @@ barplot.bootMtrPairs <- function(height, ylab=NULL, names.arg=height$labels,
 			ylim <- range(pretty(c(0, height$t0, height$critical.values)))
 			
 		} else {
-			ylim <- range(pretty(height$t0))
+			ylim <- range(pretty(c(0, height$t0)))
 		}
 	}
 	

@@ -14,11 +14,11 @@
 \usage{
        \method{print}{MSD}(x, ...)
 
-       \method{plot}{MSD}(x, type="h", ylab="MSD", ...)
+       \method{plot}{MSD}(x, type="h", ylab="MSD", ylim=NULL, ...)
 
        \method{barplot}{MSD}(height, ylab="MSD", names.arg=names(height), 
 	crit.vals=TRUE, lty.crit=c(2,1), col.crit=2, lwd.crit=c(1,2), 
-	probs=c(0.95, 0.99), n=length(height), ... )
+	probs=c(0.95, 0.99), n=length(height), ylim=NULL, ... )
 
 }
 
@@ -47,6 +47,8 @@
    \item{probs}{vector of probabilities at which critical values are drawn.}
    \item{n}{integer number of observations for critical value calculation; passed to 
             \code{\link{qmsd}}.}
+   \item{ylim}{Limits for y-axis. the default makes sure the axis begins at zero and includes 
+        all values}
    \item{\dots}{Parameters passed to other methods. }
 }
 

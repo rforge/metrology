@@ -146,7 +146,7 @@ barplot.bootMSD <- function(height, ylab="MSD", names.arg=height$labels,
 			ylim <- range(pretty(c(0, height$msd, height$critical.values)))
 			
 		} else {
-			ylim <- range(pretty(height$msd))
+			ylim <- range(pretty(c(0, height$msd)))
 		}
 	}
 

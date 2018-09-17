@@ -14,9 +14,8 @@
 }
 \usage{
 	boot.mtr.pairwise(x, s=mad , B=3000, probs=c(0.95, 0.99), 
-		cov=NULL, cor = NULL, method=c("rnorm", "lhs"), 
-		keep=FALSE, labels=names(x),
-		stat="PDchisq", ...) 
+		cov=NULL, cor = NULL, stat=c("MSD", "PDchisq"), 
+		method=c("rnorm", "lhs"), keep=FALSE, labels=names(x), ...) 
 	
 }
 
@@ -35,6 +34,8 @@
 		Covariance or correlation matrix, respectively, describing the covariance structure 
 		across \code{x}. Passed to \code{pdchisq}.
 	}
+   \item{stat}{The statistic to be bootstrapped. Either \code{"MSD"} or \code{"PDchisq"} 
+               for \code{\link{msd}} or \code{\link{pdchisq}}, respectively. } 
    \item{method}{
 		Character value describing the simulation method. 
 	}
@@ -44,28 +45,24 @@
    \item{labels}{
 		Character vector of labels for individual values.
 	}
-   \item{stat}{
-   		Character string specifying the statistic to be bootstrapped. 
-   		The default is \code{"PDchisq"}.  \code{"MSD"} provides 
-   		a bootstrap of the pairwise MSD; the difference
-   		is the class of returned object.  
-        }
    \item{\dots}{Parameters passed to other methods. }
    
 }
 \details{
 	\code{boot.mtr.pairwise} calculates a parametric bootstrap simulation 
 	(or Monte carlo simulation) of the results of \code{\link{msd}} or \code{\link{pdchisq}}
-	or applied to data. This allows individual case-specific quantiles and \emph{p}-values
+	applied to data. This allows individual case-specific quantiles and \emph{p}-values
 	to be estimated that allow for different standard errors (or standard uncertainties) \code{s}. 
 	
 	The sampling method is currently sampling from \code{rnorm}.
 	
-	Individual upper quantiles for probabilities \code{probs} and \emph{p}-values are estimated 
-	directly from the bootstrap replicates. Quantiles use \code{\link{quantile}}. \emph{p}-values 
-	are estimated from the proportion of replicates that exceed the observed values calculated by 
-	\code{\link{msd}} or \code{\link{pdchisq}}. Note that the \code{print} method for the 
-	\code{summary} object does not report zero proportions as identically zero. 	
+	Individual upper quantiles for probabilities \code{probs} and \emph{p}-values 
+	are estimated 	directly from the bootstrap replicates. Quantiles use 
+	\code{\link{quantile}}. \emph{p}-values are estimated from the proportion 
+	of replicates that exceed the observed values calculated by 
+	\code{\link{msd}} or \code{\link{pdchisq}}. Note that the \code{print} 
+	method for the \code{summary} object does not report zero proportions 
+	as identically zero. 	
 }
 \value{
 	An object of class \dQuote{bootMtrPairs}, consisting of a list containing:
@@ -116,7 +113,7 @@ S. L. R. Ellison \email{s.ellison@lgcgroup.com}
   
   # NOTE: The default summary gives individual observation p-values. 
   # To correct for multiple comparisons, apply 
-  # a suitable p-value adjustment:
+  # a suitable p-value adjustment; for example:
   summary(boot.Pb, p.adjust="holm")
 
   }

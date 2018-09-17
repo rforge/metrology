@@ -66,7 +66,7 @@
 }
 
 \seealso{
-  \code{\link{pmsd}}, \code{\link{qmsd}}, \code{\link{MSD-class}}.
+  \code{\link{PDchisq-class}}, \code{\link{bootPDchisq}}.
 }
 \references{
 	R J Douglas, A G Steele (2006) Pair-difference chi-squared statistics for Key Comparisons, 
