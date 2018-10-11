@@ -48,6 +48,12 @@
 \seealso{
   \code{\link{pmsd}}, \code{\link{qmsd}}, \code{\link{MSD-class}}.
 }
+\references{
+Ellison, S. L. R. (2018) An outlier-resistant indicator of anomalies among 
+inter-laboratory comparison data with associated uncertainty. _Metrologia_ 
+(accepted 4 October 2018)
+
+}
 \author{
 S. L. R. Ellison \email{s.ellison@lgcgroup.com}
 }
