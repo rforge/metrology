@@ -19,6 +19,10 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
+Changes in version 0.9-28-3 from version 0.9-28-2 include: 
+  \itemize{	
+	\item Corrected huber.estimate to use additional arguments in rlm call.
+ }
 Changes in version 0.9-28-2 from version 0.9-28-0 include: 
   \itemize{	
 	\item Fixed an error occurring in \code{barplot.bootMSD} when \code{names.arg}
