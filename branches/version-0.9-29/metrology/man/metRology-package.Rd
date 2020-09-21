@@ -19,13 +19,12 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
-Changes in version 0.9-29-2 from version 0.9-28-1 include: 
+Changes in version 0.9-29-2 from version 0.9-28-4 include: 
   \itemize{	
 	\item A new set of functions for pair-difference chi-squared statistics; see 
 	      \code{\link{pdchisq}} and \code{\link{bootPDchisq}}.
 	\item Group label placement in \code{blockplot} has been extended to take 
 	      \code{\link{legend}}-like character specification.
- 	\item Corrected huber.estimate to use additional arguments in rlm call.
 }
  WARNING: The addition of a new pairwise statistic involves significant 
  duplication of code used for the bootMSD class. Future versions are likely
@@ -34,8 +33,19 @@ Changes in version 0.9-29-2 from version 0.9-28-1 include:
  reduced to a wrapper for boot.mtr.pairwise, the current workhorse
  for bootPDchisq. 
  
-Changes in version 0.9-28-1 from version 0.9-28-0 include: 
+Changes in version 0.9-28-4 from version 0.9-28-3: 
   \itemize{	
+	\item Corrected bug in uncertMC which sometimes failed to include non-zero 
+	      covariances in partial covariance treatment when negative. 
+ }
+Changes in version 0.9-28-3 from version 0.9-28-2 include: 
+  \itemize{	
+	\item Corrected huber.estimate to use additional arguments in rlm call.
+ }
+Changes in version 0.9-28-2 from version 0.9-28-0 include: 
+  \itemize{	
+	\item Fixed an error occurring in \code{barplot.bootMSD} when \code{names.arg}
+	      was unspecified and the boot object had no labels.
 	\item Fixed \code{blockplot} x-axis label, which was incorrect.
  
  }

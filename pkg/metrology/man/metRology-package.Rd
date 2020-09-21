@@ -19,6 +19,11 @@ The metRology package includes functions for:
 	\item Support functions for an excel interface
   } 
 
+Changes in version 0.9-28-4 from version 0.9-28-3: 
+  \itemize{	
+	\item Corrected bug in uncertMC which sometimes failed to include non-zero 
+	      covariances in partial covariance treatment when negative. 
+ }
 Changes in version 0.9-28-3 from version 0.9-28-2 include: 
   \itemize{	
 	\item Corrected huber.estimate to use additional arguments in rlm call.

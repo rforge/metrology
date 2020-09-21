@@ -146,7 +146,7 @@ uncertMC<-function(expr, x, u, method="MC", df, cor, cov, distrib, distrib.pars,
         
         if(use.cov) {
                 #Pull out correlated variables
-                cor.vars<-which(rowSums(cor)> (1+.Machine$double.eps*nrow(cor)))
+                cor.vars<-which(rowSums(abs(cor))> (1+.Machine$double.eps*nrow(cor)))
                 cor.vars.names<-names(x)[cor.vars]
                 #Check distribs of these are Normal
                 if( any(sapply(distrib, function(d) d!="norm"))) 
